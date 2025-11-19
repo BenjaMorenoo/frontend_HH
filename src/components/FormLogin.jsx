@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import facebookIcon from "../assets/facebook-svgrepo-com.svg";
 import googleIcon from "../assets/google-color-svgrepo-com.svg";
 import mailIcon from "../assets/mail-svgrepo-com.svg";
@@ -20,10 +22,18 @@ export default function LoginForm() {
       return;
     }
     setError("");
-    console.log("Email:", email);
-    console.log("Password:", password);
-    // Aquí puedes manejar el login (por ejemplo, API call)
+    // use AuthContext login so UI updates immediately
+    login(email, password)
+      .then(() => {
+        navigate('/')
+      })
+      .catch((err) => {
+        setError(err?.message || 'Error iniciando sesión')
+      })
   };
+
+  const navigate = useNavigate()
+  const { login } = useAuth()
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">

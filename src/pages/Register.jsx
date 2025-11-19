@@ -1,6 +1,7 @@
 
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from '../context/AuthContext'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import facebookIcon from "../assets/facebook-svgrepo-com.svg"
@@ -11,17 +12,22 @@ import unlockIcon from "../assets/visible-password-security-protect-svgrepo-com.
 import lockIcon from "../assets/eye-password-see-view-svgrepo-com.svg"
 
 export default function Register() {
-  const [name, setName] = useState("")
+  const [primerNombre, setPrimerNombre] = useState("")
+  const [segundoNombre, setSegundoNombre] = useState("")
+  const [primerApellido, setPrimerApellido] = useState("")
+  const [segundoApellido, setSegundoApellido] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const [phone, setPhone] = useState("")
+  const [address, setAddress] = useState("")
   const [error, setError] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!name || !email || !password || !confirmPassword) {
+    if (!primerNombre || !primerApellido || !email || !password || !confirmPassword || !phone || !address) {
       setError("Por favor completa todos los campos")
       return
     }
@@ -29,8 +35,8 @@ export default function Register() {
       setError("Email inválido")
       return
     }
-    if (password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres")
+    if (password.length < 8) {
+      setError("La contraseña debe tener al menos 8 caracteres")
       return
     }
     if (password !== confirmPassword) {
@@ -39,9 +45,29 @@ export default function Register() {
     }
 
     setError("")
-    console.log("Register:", { name, email, password })
-    // Aquí llama a la API de registro
+    // register using AuthContext then auto-login via context.login
+    register({
+      primer_nombre: primerNombre,
+      segundo_nombre: segundoNombre,
+      primer_apellido: primerApellido,
+      segundo_apellido: segundoApellido,
+      email,
+      password,
+      passwordConfirm: confirmPassword,
+      phone,
+      address,
+    })
+      .then(() => login(email, password))
+      .then(() => {
+        navigate('/')
+      })
+      .catch((err) => {
+        setError(err?.message || 'Error registrando usuario')
+      })
   }
+
+  const navigate = useNavigate()
+  const { register, login } = useAuth()
 
   return (
     <div>
@@ -54,20 +80,23 @@ export default function Register() {
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Nombre */}
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-              Nombre
-            </label>
-            <div className="relative mt-1">
-              <input
-                id="name"
-                type="text"
-                className="w-full rounded-lg border border-gray-300 py-2.5 pl-3 pr-3 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-100"
-                placeholder="Tu nombre completo"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+          {/* Nombre completo (separado) */}
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <div>
+              <label htmlFor="primerNombre" className="block text-sm font-medium text-gray-700">Primer nombre</label>
+              <input id="primerNombre" value={primerNombre} onChange={e => setPrimerNombre(e.target.value)} placeholder="Primer Nombre" className="mt-1 w-full rounded-lg border border-gray-300 py-2.5 pl-3 pr-3 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-100" />
+            </div>
+            <div>
+              <label htmlFor="segundoNombre" className="block text-sm font-medium text-gray-700">Segundo nombre</label>
+              <input id="segundoNombre" value={segundoNombre} onChange={e => setSegundoNombre(e.target.value)} placeholder="Segundo Nombre (opcional)" className="mt-1 w-full rounded-lg border border-gray-300 py-2.5 pl-3 pr-3 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-100" />
+            </div>
+            <div>
+              <label htmlFor="primerApellido" className="block text-sm font-medium text-gray-700">Primer apellido</label>
+              <input id="primerApellido" value={primerApellido} onChange={e => setPrimerApellido(e.target.value)} placeholder="Primer Apellido" className="mt-1 w-full rounded-lg border border-gray-300 py-2.5 pl-3 pr-3 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-100" />
+            </div>
+            <div>
+              <label htmlFor="segundoApellido" className="block text-sm font-medium text-gray-700">Segundo apellido</label>
+              <input id="segundoApellido" value={segundoApellido} onChange={e => setSegundoApellido(e.target.value)} placeholder="Segundo Apellido (opcional)" className="mt-1 w-full rounded-lg border border-gray-300 py-2.5 pl-3 pr-3 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-100" />
             </div>
           </div>
 
@@ -159,6 +188,40 @@ export default function Register() {
             </div>
           </div>
 
+          {/* Phone */}
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+              Teléfono
+            </label>
+            <div className="relative mt-1">
+              <input
+                id="phone"
+                type="text"
+                className="w-full rounded-lg border border-gray-300 py-2.5 pl-3 pr-3 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-100"
+                placeholder="+56 9 1234 5678"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Address */}
+          <div>
+            <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+              Dirección
+            </label>
+            <div className="relative mt-1">
+              <input
+                id="address"
+                type="text"
+                className="w-full rounded-lg border border-gray-300 py-2.5 pl-3 pr-3 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-100"
+                placeholder="Calle, número, ciudad"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </div>
+          </div>
+
           {/* error */}
           {error && <p className="text-center text-sm text-red-500">{error}</p>}
 
@@ -197,7 +260,7 @@ export default function Register() {
         </div>
       </main>
 
-      <Footer />
+      
     </div>
   )
 }

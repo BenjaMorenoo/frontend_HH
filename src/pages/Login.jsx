@@ -8,7 +8,7 @@ const Login = () => {
     <div className="login-container">
       <Navbar />
       <LoginForm />
-      <Footer />
+      
     </div>
   )
 }

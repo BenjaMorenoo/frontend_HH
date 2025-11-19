@@ -153,7 +153,7 @@ const About = () => {
         </div>
       </main>
 
-      <Footer />
+      
     </div>
   )
 }
