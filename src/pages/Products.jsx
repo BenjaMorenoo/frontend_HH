@@ -23,6 +23,7 @@ const Products = () => {
   const location = useLocation()
   const [searchParams] = useSearchParams()
   const q = searchParams.get('q') || ''
+  const productParam = searchParams.get('product') || ''
 
   // apply category filter then search filter
   const byCategory = category === 'Todas' ? productsList : productsList.filter(p => p.category === category)
@@ -62,6 +63,17 @@ const Products = () => {
     return () => { mounted = false }
   }, [])
 
+  // open specific product modal when ?product=<id> is present
+  useEffect(() => {
+    if (!productParam) {
+      // if no product param, don't override manual selection
+      return
+    }
+    // try to find in loaded products list first, then fallback to sampleProducts
+    const found = productsList.find(p => String(p.id) === String(productParam)) || sampleProducts.find(p => String(p.id) === String(productParam))
+    if (found) setSelected(found)
+  }, [productParam, productsList])
+
   
 
   return (
@@ -95,14 +107,19 @@ const Products = () => {
             <button
               key={p.id}
               onClick={() => setSelected(p)}
-              className="group block transform overflow-hidden rounded-lg bg-white shadow hover:scale-105 transition"
+              className="group block transform overflow-hidden rounded-lg bg-white shadow hover:scale-105 transition h-64 flex flex-col"
             >
-                  <div className="h-40 w-full flex items-center justify-center overflow-hidden">
+              <div className="h-40 w-full flex items-center justify-center overflow-hidden">
                 <img src={p.image} alt={p.title} className="h-full w-auto max-w-full object-contain mx-auto" />
               </div>
-              <div className="p-4 text-left">
-                <h3 className="text-sm font-medium text-gray-800">{p.code} - {p.title}</h3>
-                <p className="mt-2 text-sm text-gray-600">{formatCLP(p.price)}{p.unit ? ` ${p.unit.replace(/^CLP\s*/,'')}` : ''}</p>
+              <div className="p-4 text-left flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-sm font-medium text-gray-800">{p.code} - {p.title}</h3>
+                  <p className="mt-2 text-sm text-gray-600">{formatCLP(p.price)}{p.unit ? ` ${p.unit.replace(/^CLP\s*/,'')}` : ''}</p>
+                </div>
+                <div className="mt-3">
+                  <span className="text-xs text-gray-500">Stock: {p.stock ?? '—'}</span>
+                </div>
               </div>
             </button>
           ))}

@@ -18,6 +18,8 @@ export default function Post() {
   const [rating, setRating] = useState(5)
   const [comment, setComment] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [selectedReview, setSelectedReview] = useState(null)
+  const [showReviewModal, setShowReviewModal] = useState(false)
 
   useEffect(() => {
     let mounted = true
@@ -61,6 +63,17 @@ export default function Post() {
     return () => { mounted = false }
   }, [id])
 
+  useEffect(() => {
+    function onKey(e) {
+      if (e.key === 'Escape' && showReviewModal) {
+        setShowReviewModal(false)
+        setSelectedReview(null)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [showReviewModal])
+
   async function submitReview(e) {
     e.preventDefault()
     if (!isAuthenticated) return alert('Debes iniciar sesión para dejar una reseña')
@@ -100,17 +113,62 @@ export default function Post() {
 
         <section className="mt-6">
           <h3 className="text-lg font-medium mb-3">Reseñas</h3>
-          <div className="space-y-3">
+
+          {/* Summary */}
+          <div className="flex items-center gap-4 mb-4">
+            <div className="flex items-center gap-3">
+              <div className="text-3xl font-semibold">{reviews.length ? (Math.round((reviews.reduce((s, r) => s + Number(r.rating || 0), 0) / reviews.length) * 10) / 10) : '—'}</div>
+              <div className="text-sm text-gray-500">/ 5</div>
+            </div>
+            <div className="flex items-center text-yellow-500 text-sm">
+              {/* show stars for average (rounded) */}
+              {(() => {
+                const avg = reviews.length ? Math.round((reviews.reduce((s, r) => s + Number(r.rating || 0), 0) / reviews.length)) : 0
+                return Array.from({ length: 5 }).map((_, i) => (
+                  <svg key={i} className={`h-4 w-4 ${i < avg ? 'text-yellow-500' : 'text-gray-300'}`} viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.966a1 1 0 00.95.69h4.174c.969 0 1.371 1.24.588 1.81l-3.376 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.921-.755 1.688-1.54 1.118L10 15.347l-3.376 2.455c-.784.57-1.839-.197-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.631 9.393c-.783-.57-.38-1.81.588-1.81h4.174a1 1 0 00.95-.69L9.05 2.927z" />
+                  </svg>
+                ))
+              })()}
+            </div>
+            <div className="text-sm text-gray-500">{reviews.length} reseña{reviews.length !== 1 ? 's' : ''}</div>
+          </div>
+
+          <div className="grid gap-4">
             {reviews.length === 0 && <div className="text-sm text-gray-600">Aún no hay reseñas.</div>}
-            {reviews.map(r => (
-              <div key={r.id} className="p-3 border rounded bg-white">
-                <div className="flex justify-between items-center">
-                  <div className="text-sm font-medium">{r.expand?.user?.email || r.user}</div>
-                  <div className="text-sm text-yellow-600">{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</div>
+
+            {reviews.map(r => {
+              const name = r.expand?.user?.primer_nombre || r.expand?.user?.name || r.expand?.user?.email || r.user || 'Anónimo'
+              const initials = (name || '').split(' ').map(s => s[0]).slice(0,2).join('').toUpperCase()
+              const created = r.created ? new Date(r.created).toLocaleDateString('es-CL') : null
+              return (
+                <div
+                  key={r.id}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => { setSelectedReview(r); setShowReviewModal(true) }}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { setSelectedReview(r); setShowReviewModal(true) } }}
+                  className="bg-white p-4 rounded-lg border hover:shadow-lg transform hover:-translate-y-1 transition-shadow transition-transform cursor-pointer"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0">
+                      <div className="h-10 w-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center font-semibold">{initials || 'U'}</div>
+                    </div>
+
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <div className="text-sm font-medium text-gray-800">{name}</div>
+                        <div className="flex items-center gap-2">
+                          <div className="text-yellow-500 text-sm">{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</div>
+                          {created && <div className="text-xs text-gray-400">{created}</div>}
+                        </div>
+                      </div>
+                      {r.comment && <div className="mt-2 text-sm text-gray-700">{r.comment}</div>}
+                    </div>
+                  </div>
                 </div>
-                {r.comment && <div className="mt-2 text-sm text-gray-700">{r.comment}</div>}
-              </div>
-            ))}
+              )
+            })}
           </div>
 
           <div className="mt-4 bg-white rounded p-4 shadow">
@@ -138,6 +196,26 @@ export default function Post() {
             </form>
           </div>
         </section>
+
+        {showReviewModal && selectedReview && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <div className="absolute inset-0 bg-black opacity-50" onClick={() => { setShowReviewModal(false); setSelectedReview(null) }} />
+
+            <div className="relative z-10 bg-white rounded-lg shadow-lg max-w-2xl w-full mx-4 p-6 transform transition-all">
+              <div className="flex items-start justify-between">
+                <div>
+                  <div className="text-lg font-semibold">{selectedReview.expand?.user?.primer_nombre || selectedReview.expand?.user?.name || selectedReview.expand?.user?.email || selectedReview.user || 'Anónimo'}</div>
+                  <div className="text-xs text-gray-400">{selectedReview.created ? new Date(selectedReview.created).toLocaleDateString('es-CL') : ''}</div>
+                </div>
+                <button onClick={() => { setShowReviewModal(false); setSelectedReview(null) }} className="text-gray-500 hover:text-gray-700 ml-4" aria-label="Cerrar reseña">×</button>
+              </div>
+
+              <div className="mt-4 text-yellow-500">{'★'.repeat(selectedReview.rating)}{'☆'.repeat(5 - selectedReview.rating)}</div>
+              {selectedReview.comment && <div className="mt-4 text-gray-700 whitespace-pre-wrap">{selectedReview.comment}</div>}
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   )

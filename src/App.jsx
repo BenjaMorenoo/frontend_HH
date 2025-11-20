@@ -17,6 +17,7 @@ import { AuthProvider } from "./context/AuthContext"
 import CartPanel from "./components/CartPanel"
 import FloatingCartButton from "./components/FloatingCartButton"
 import Footer from "./components/Footer"
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
     <AuthProvider>
     <CartProvider>
       <Router>
+        <ScrollToTop />
         <div className="min-h-screen flex flex-col">
           <main className="flex-1">
             <Routes>

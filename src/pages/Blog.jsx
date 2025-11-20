@@ -58,8 +58,8 @@ const Blog = () => {
           {posts.map(p => (
             <article key={p.id} className="bg-white rounded shadow-sm overflow-hidden flex flex-col h-full">
               {p.cover && (
-                <div className="w-full">
-                  <img src={fileUrl('posts', p.id, p.cover)} alt={p.title} className="w-full h-40 md:h-48 lg:h-56 object-cover" />
+                <div className="h-40 w-full flex items-center justify-center overflow-hidden bg-gray-100">
+                  <img src={fileUrl('posts', p.id, p.cover)} alt={p.title} className="h-full w-auto max-w-full object-contain mx-auto" />
                 </div>
               )}
               <div className="p-4 flex-1 flex flex-col">

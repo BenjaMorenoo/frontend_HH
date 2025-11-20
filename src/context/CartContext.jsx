@@ -198,6 +198,26 @@ export function CartProvider({ children }) {
     })()
   }
 
+  const clearCart = () => {
+    // optimistic local update
+    const prev = cart.slice()
+    setCart([])
+    ;(async () => {
+      try {
+        // attempt to delete all server-side cart_items for this session
+        const q = `?filter=sessionId="${sessionId}"`
+        const res = await getRecords('cart_items', q)
+        if (res && res.items && res.items.length > 0) {
+          await Promise.all(res.items.map(it => deleteRecord('cart_items', it.id).catch(() => null)))
+        }
+      } catch (e) {
+        console.warn('Failed to clear cart on server', e)
+        // restore local cart if server delete failed
+        setCart(prev)
+      }
+    })()
+  }
+
   const updateQty = (id, qty) => {
     if (qty <= 0) return removeFromCart(id)
     // optimistic local update
@@ -223,6 +243,8 @@ export function CartProvider({ children }) {
   }
 
   const cartCount = cart.reduce((s, i) => s + (i.qty || 0), 0)
+  // Display count capped at 9+ for UI badges
+  const displayCartCount = cartCount > 9 ? '9+' : cartCount
   const cartTotal = cart.reduce((s, i) => s + (i.qty || 0) * (i.price || 0), 0)
 
   const formatCLP = (value) => {
@@ -240,8 +262,10 @@ export function CartProvider({ children }) {
     setCartOpen,
     addToCart,
     removeFromCart,
+    clearCart,
     updateQty,
     cartCount,
+    displayCartCount,
     cartTotal,
     formatCLP,
   }
