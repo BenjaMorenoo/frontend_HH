@@ -1,0 +1,284 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Footer snapshot > matches snapshot 1`] = `
+<div>
+  <footer
+    class="bg-slate-900 text-slate-300"
+  >
+    <div
+      class="max-w-7xl mx-auto px-6 py-12"
+    >
+      <div
+        class="grid grid-cols-1 md:grid-cols-4 gap-8"
+      >
+        <div>
+          <img
+            alt="Logo"
+            class="h-16 w-auto mr-6"
+            src="/src/assets/logo.png"
+          />
+          <p
+            class="mt-4 text-sm text-slate-400"
+          >
+            Tu tienda online de productos orgánicos frescos. Conectamos directamente a productores locales con tu hogar para ofrecerte la mejor calidad.
+          </p>
+          <div
+            class="flex items-center space-x-3 mt-4"
+          >
+            <a
+              aria-label="facebook"
+              class="text-slate-400 hover:text-white"
+              href="#"
+            >
+              <img
+                alt="Facebook"
+                class="h-5 w-5"
+                src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='utf-8'?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20width='800px'%20height='800px'%20viewBox='0%200%2016%2016'%20xmlns='http://www.w3.org/2000/svg'%20fill='none'%3e%3cpath%20fill='%231877F2'%20d='M15%208a7%207%200%2000-7-7%207%207%200%2000-1.094%2013.915v-4.892H5.13V8h1.777V6.458c0-1.754%201.045-2.724%202.644-2.724.766%200%201.567.137%201.567.137v1.723h-.883c-.87%200-1.14.54-1.14%201.093V8h1.941l-.31%202.023H9.094v4.892A7.001%207.001%200%200015%208z'/%3e%3cpath%20fill='%23ffffff'%20d='M10.725%2010.023L11.035%208H9.094V6.687c0-.553.27-1.093%201.14-1.093h.883V3.87s-.801-.137-1.567-.137c-1.6%200-2.644.97-2.644%202.724V8H5.13v2.023h1.777v4.892a7.037%207.037%200%20002.188%200v-4.892h1.63z'/%3e%3c/svg%3e"
+              />
+            </a>
+            <a
+              aria-label="instagram"
+              class="text-slate-400 hover:text-white"
+              href="#"
+            >
+              <img
+                alt="Instagram"
+                class="h-5 w-5"
+                src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='utf-8'?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20width='800px'%20height='800px'%20viewBox='0%200%2032%2032'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='2'%20y='2'%20width='28'%20height='28'%20rx='6'%20fill='url(%23paint0_radial_87_7153)'/%3e%3crect%20x='2'%20y='2'%20width='28'%20height='28'%20rx='6'%20fill='url(%23paint1_radial_87_7153)'/%3e%3crect%20x='2'%20y='2'%20width='28'%20height='28'%20rx='6'%20fill='url(%23paint2_radial_87_7153)'/%3e%3cpath%20d='M23%2010.5C23%2011.3284%2022.3284%2012%2021.5%2012C20.6716%2012%2020%2011.3284%2020%2010.5C20%209.67157%2020.6716%209%2021.5%209C22.3284%209%2023%209.67157%2023%2010.5Z'%20fill='white'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M16%2021C18.7614%2021%2021%2018.7614%2021%2016C21%2013.2386%2018.7614%2011%2016%2011C13.2386%2011%2011%2013.2386%2011%2016C11%2018.7614%2013.2386%2021%2016%2021ZM16%2019C17.6569%2019%2019%2017.6569%2019%2016C19%2014.3431%2017.6569%2013%2016%2013C14.3431%2013%2013%2014.3431%2013%2016C13%2017.6569%2014.3431%2019%2016%2019Z'%20fill='white'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M6%2015.6C6%2012.2397%206%2010.5595%206.65396%209.27606C7.2292%208.14708%208.14708%207.2292%209.27606%206.65396C10.5595%206%2012.2397%206%2015.6%206H16.4C19.7603%206%2021.4405%206%2022.7239%206.65396C23.8529%207.2292%2024.7708%208.14708%2025.346%209.27606C26%2010.5595%2026%2012.2397%2026%2015.6V16.4C26%2019.7603%2026%2021.4405%2025.346%2022.7239C24.7708%2023.8529%2023.8529%2024.7708%2022.7239%2025.346C21.4405%2026%2019.7603%2026%2016.4%2026H15.6C12.2397%2026%2010.5595%2026%209.27606%2025.346C8.14708%2024.7708%207.2292%2023.8529%206.65396%2022.7239C6%2021.4405%206%2019.7603%206%2016.4V15.6ZM15.6%208H16.4C18.1132%208%2019.2777%208.00156%2020.1779%208.0751C21.0548%208.14674%2021.5032%208.27659%2021.816%208.43597C22.5686%208.81947%2023.1805%209.43139%2023.564%2010.184C23.7234%2010.4968%2023.8533%2010.9452%2023.9249%2011.8221C23.9984%2012.7223%2024%2013.8868%2024%2015.6V16.4C24%2018.1132%2023.9984%2019.2777%2023.9249%2020.1779C23.8533%2021.0548%2023.7234%2021.5032%2023.564%2021.816C23.1805%2022.5686%2022.5686%2023.1805%2021.816%2023.564C21.5032%2023.7234%2021.0548%2023.8533%2020.1779%2023.9249C19.2777%2023.9984%2018.1132%2024%2016.4%2024H15.6C13.8868%2024%2012.7223%2023.9984%2011.8221%2023.9249C10.9452%2023.8533%2010.4968%2023.7234%2010.184%2023.564C9.43139%2023.1805%208.81947%2022.5686%208.43597%2021.816C8.27659%2021.5032%208.14674%2021.0548%208.0751%2020.1779C8.00156%2019.2777%208%2018.1132%208%2016.4V15.6C8%2013.8868%208.00156%2012.7223%208.0751%2011.8221C8.14674%2010.9452%208.27659%2010.4968%208.43597%2010.184C8.81947%209.43139%209.43139%208.81947%2010.184%208.43597C10.4968%208.27659%2010.9452%208.14674%2011.8221%208.0751C12.7223%208.00156%2013.8868%208%2015.6%208Z'%20fill='white'/%3e%3cdefs%3e%3cradialGradient%20id='paint0_radial_87_7153'%20cx='0'%20cy='0'%20r='1'%20gradientUnits='userSpaceOnUse'%20gradientTransform='translate(12%2023)%20rotate(-55.3758)%20scale(25.5196)'%3e%3cstop%20stop-color='%23B13589'/%3e%3cstop%20offset='0.79309'%20stop-color='%23C62F94'/%3e%3cstop%20offset='1'%20stop-color='%238A3AC8'/%3e%3c/radialGradient%3e%3cradialGradient%20id='paint1_radial_87_7153'%20cx='0'%20cy='0'%20r='1'%20gradientUnits='userSpaceOnUse'%20gradientTransform='translate(11%2031)%20rotate(-65.1363)%20scale(22.5942)'%3e%3cstop%20stop-color='%23E0E8B7'/%3e%3cstop%20offset='0.444662'%20stop-color='%23FB8A2E'/%3e%3cstop%20offset='0.71474'%20stop-color='%23E2425C'/%3e%3cstop%20offset='1'%20stop-color='%23E2425C'%20stop-opacity='0'/%3e%3c/radialGradient%3e%3cradialGradient%20id='paint2_radial_87_7153'%20cx='0'%20cy='0'%20r='1'%20gradientUnits='userSpaceOnUse'%20gradientTransform='translate(0.500002%203)%20rotate(-8.1301)%20scale(38.8909%208.31836)'%3e%3cstop%20offset='0.156701'%20stop-color='%23406ADC'/%3e%3cstop%20offset='0.467799'%20stop-color='%236A45BE'/%3e%3cstop%20offset='1'%20stop-color='%236A45BE'%20stop-opacity='0'/%3e%3c/radialGradient%3e%3c/defs%3e%3c/svg%3e"
+              />
+            </a>
+            <a
+              aria-label="x"
+              class="text-slate-400 hover:text-white"
+              href="#"
+            >
+              <img
+                alt="X"
+                class="h-5 w-5"
+                src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20width='300'%20height='300.251'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M178.57%20127.15%20290.27%200h-26.46l-97.03%20110.38L89.34%200H0l117.13%20166.93L0%20300.25h26.46l102.4-116.59%2081.8%20116.59h89.34M36.01%2019.54H76.66l187.13%20262.13h-40.66'/%3e%3c/svg%3e"
+              />
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4
+            class="text-white font-semibold mb-4"
+          >
+            Enlaces Rápidos
+          </h4>
+          <ul
+            class="space-y-2 text-sm text-slate-400"
+          >
+            <li>
+              <a
+                class="hover:underline"
+                href="#"
+              >
+                Inicio
+              </a>
+            </li>
+            <li>
+              <a
+                class="hover:underline"
+                href="#"
+              >
+                Productos
+              </a>
+            </li>
+            <li>
+              <a
+                class="hover:underline"
+                href="#"
+              >
+                Blog
+              </a>
+            </li>
+            <li>
+              <a
+                class="hover:underline"
+                href="#"
+              >
+                Acerca de Nosotros
+              </a>
+            </li>
+            <li>
+              <a
+                class="hover:underline"
+                href="#"
+              >
+                Contacto
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-white font-semibold mb-4"
+          >
+            Categorías
+          </h4>
+          <ul
+            class="space-y-2 text-sm text-slate-400"
+          >
+            <li>
+              <a
+                class="hover:underline"
+                href="#"
+              >
+                Verduras
+              </a>
+            </li>
+            <li>
+              <a
+                class="hover:underline"
+                href="#"
+              >
+                Frutas
+              </a>
+            </li>
+            <li>
+              <a
+                class="hover:underline"
+                href="#"
+              >
+                Hierbas
+              </a>
+            </li>
+            <li>
+              <a
+                class="hover:underline"
+                href="#"
+              >
+                Lácteos
+              </a>
+            </li>
+            <li>
+              <a
+                class="hover:underline"
+                href="#"
+              >
+                Granos
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            class="text-white font-semibold mb-4"
+          >
+            Contacto
+          </h4>
+          <ul
+            class="text-sm text-slate-400 space-y-3"
+          >
+            <li
+              class="flex items-start gap-2"
+            >
+              <svg
+                class="h-4 w-4 mt-0.5 text-slate-400"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"
+                />
+              </svg>
+              <span>
+                Av. Calle falsa, Concepcioón, Chile
+              </span>
+            </li>
+            <li
+              class="flex items-center gap-2"
+            >
+              <svg
+                class="h-4 w-4 text-slate-400"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21 16.5v3a1.5 1.5 0 01-1.6 1.5c-8.8-.9-15.9-8-16.8-16.8A1.5 1.5 0 015.5 2h3A1.5 1.5 0 0110 3.4c0 .6-.2 1.4-.6 2.1-.4.8-.9 1.6-1.4 2.1.9 2.1 2.8 4 4.9 4.9.6-.5 1.3-1 2.1-1.4.7-.4 1.5-.6 2.1-.6A1.5 1.5 0 0120.6 14v2.5z"
+                />
+              </svg>
+              <span>
+                +56 9 1234-5678
+              </span>
+            </li>
+            <li
+              class="flex items-center gap-2"
+            >
+              <svg
+                class="h-4 w-4 text-slate-400"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                />
+              </svg>
+              <span>
+                info@huertohogar.cl
+              </span>
+            </li>
+          </ul>
+          <div
+            class="mt-4"
+          >
+            <label
+              class="text-sm text-slate-400 block mb-2"
+            >
+              Newsletter
+            </label>
+            <div
+              class="flex"
+            >
+              <input
+                class="w-full rounded-l-md px-3 py-2 bg-slate-800 text-sm placeholder-slate-400 border border-slate-700 focus:outline-none"
+                placeholder="Tu email"
+              />
+              <button
+                class="bg-green-600 text-white rounded-r-md px-4"
+              >
+                Suscribirse
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="border-t border-slate-800 mt-8 pt-6 flex flex-col md:flex-row items-center justify-between text-sm text-slate-400"
+      >
+        <p>
+          © 
+          2025
+           HuertoHogar. Todos los derechos reservados.
+        </p>
+        <div
+          class="flex space-x-6 mt-4 md:mt-0"
+        >
+          <a
+            class="hover:underline"
+            href="#"
+          >
+            Política de Privacidad
+          </a>
+          <a
+            class="hover:underline"
+            href="#"
+          >
+            Términos de Servicio
+          </a>
+          <a
+            class="hover:underline"
+            href="#"
+          >
+            Política de Cookies
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+`;

@@ -35,14 +35,31 @@ export default function Register() {
       setError("Email inválido")
       return
     }
-    if (password.length < 8) {
-      setError("La contraseña debe tener al menos 8 caracteres")
+    // password rules: min 6, max 8, must contain at least one symbol
+    if (password.length < 6 || password.length > 8) {
+      setError("La contraseña debe tener entre 6 y 8 caracteres")
+      return
+    }
+    if (!/[^A-Za-z0-9]/.test(password)) {
+      setError("La contraseña debe contener al menos un símbolo (p.ej. !@#$%)")
       return
     }
     if (password !== confirmPassword) {
       setError("Las contraseñas no coinciden")
       return
     }
+
+    // normalize and validate phone: ensure Chile mobile prefix +56 9 and 8 digits after the 9
+    const digits = (phone || '').replace(/\D/g, '')
+    let rest = digits
+    if (rest.startsWith('56') && rest.length > 2) rest = rest.slice(2)
+    if (rest.startsWith('9')) rest = rest.slice(1)
+    // now rest should be exactly 8 digits
+    if (rest.length !== 8) {
+      setError('El número debe tener 8 dígitos después del prefijo +56 9')
+      return
+    }
+    const normalizedPhone = `+56 9 ${rest.slice(0,4)} ${rest.slice(4)}`
 
     setError("")
     // register using AuthContext then auto-login via context.login
@@ -54,7 +71,7 @@ export default function Register() {
       email,
       password,
       passwordConfirm: confirmPassword,
-      phone,
+      phone: normalizedPhone,
       address,
     })
       .then(() => login(email, password))
@@ -64,6 +81,66 @@ export default function Register() {
       .catch((err) => {
         setError(err?.message || 'Error registrando usuario')
       })
+  }
+
+  // phone input handler: enforce Chile mobile +56 9 and limit to 8 digits after the 9
+  const handlePhoneChange = (e) => {
+    const raw = e.target.value || ''
+    // extract only digits
+    let digits = raw.replace(/\D/g, '')
+
+    // remove leading country code if present
+    if (digits.startsWith('56')) digits = digits.slice(2)
+    // remove leading mobile 9 if present (we want the 8-digit local part)
+    if (digits.startsWith('9')) digits = digits.slice(1)
+
+    // limit to 8 digits
+    digits = digits.slice(0, 8)
+
+    if (digits.length === 0) {
+      setPhone('+56 9 ')
+      return
+    }
+
+    const first4 = digits.slice(0, 4)
+    const last4 = digits.slice(4)
+    const formatted = last4 ? `+56 9 ${first4} ${last4}` : `+56 9 ${first4}`
+    setPhone(formatted)
+  }
+
+  const handlePhoneKeyDown = (e) => {
+    // allow control keys
+    const allowed = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab']
+    if (allowed.includes(e.key)) return
+    // only intercept digit keys
+    if (!/^[0-9]$/.test(e.key)) return
+    // count current digits excluding country/mobile prefix
+    const currentDigits = (phone || '').replace(/\D/g, '')
+    let rest = currentDigits
+    if (rest.startsWith('56')) rest = rest.slice(2)
+    if (rest.startsWith('9')) rest = rest.slice(1)
+    if (rest.length >= 8) {
+      e.preventDefault()
+    }
+  }
+
+  const handlePhonePaste = (e) => {
+    e.preventDefault()
+    const paste = (e.clipboardData || window.clipboardData).getData('Text') || ''
+    const pasteDigits = paste.replace(/\D/g, '')
+    const currentDigits = (phone || '').replace(/\D/g, '')
+    let rest = currentDigits
+    if (rest.startsWith('56')) rest = rest.slice(2)
+    if (rest.startsWith('9')) rest = rest.slice(1)
+    const combined = (rest + pasteDigits).slice(0, 8)
+    if (combined.length === 0) {
+      setPhone('+56 9 ')
+      return
+    }
+    const first4 = combined.slice(0, 4)
+    const last4 = combined.slice(4)
+    const formatted = last4 ? `+56 9 ${first4} ${last4}` : `+56 9 ${first4}`
+    setPhone(formatted)
   }
 
   const navigate = useNavigate()
@@ -200,7 +277,11 @@ export default function Register() {
                 className="w-full rounded-lg border border-gray-300 py-2.5 pl-3 pr-3 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-100"
                 placeholder="+56 9 1234 5678"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={handlePhoneChange}
+                onKeyDown={handlePhoneKeyDown}
+                onPaste={handlePhonePaste}
+                onFocus={() => { if (!phone || phone.trim() === '') setPhone('+56 9 ') }}
+                onBlur={() => { if (phone === '+56 9 ') setPhone('') }}
               />
             </div>
           </div>

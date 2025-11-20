@@ -60,6 +60,17 @@ export default function Profile(){
       return
     }
 
+    // validate/normalize phone: ensure Chile mobile +56 9 and 8 digits after the 9
+    const digits = (phone || '').replace(/\D/g, '')
+    let rest = digits
+    if (rest.startsWith('56') && rest.length > 2) rest = rest.slice(2)
+    if (rest.startsWith('9')) rest = rest.slice(1)
+    if (rest.length !== 8) {
+      setError('El número debe tener 8 dígitos después del prefijo +56 9')
+      return
+    }
+    const normalizedPhone = `+56 9 ${rest.slice(0,4)} ${rest.slice(4)}`
+
     const formData = new FormData()
     // send separated name fields (keep legacy compatibility if needed)
     formData.append('primer_nombre', primerNombre)
@@ -74,8 +85,14 @@ export default function Profile(){
 
     // include password change if provided
     if (newPassword || confirmPassword) {
-      if (newPassword.length < 8) {
-        setError('La nueva contraseña debe tener al menos 8 caracteres')
+      // password rules: min 6, max 8, must contain at least one symbol
+      if (newPassword.length < 6 || newPassword.length > 8) {
+        setError('La nueva contraseña debe tener entre 6 y 8 caracteres')
+        setLoading(false)
+        return
+      }
+      if (!/[^A-Za-z0-9]/.test(newPassword)) {
+        setError('La nueva contraseña debe contener al menos un símbolo (p.ej. !@#$%)')
         setLoading(false)
         return
       }
@@ -107,6 +124,55 @@ export default function Profile(){
     if (typeof avatarField === 'string') return fileUrl('users', user.id, avatarField)
     if (Array.isArray(avatarField) && avatarField.length > 0) return fileUrl('users', user.id, avatarField[0])
     return null
+  }
+
+  // phone input handler: enforce Chile mobile +56 9 and limit to 8 digits after the 9
+  const handlePhoneChange = (e) => {
+    const raw = e.target.value || ''
+    let digits = raw.replace(/\D/g, '')
+    if (digits.startsWith('56')) digits = digits.slice(2)
+    if (digits.startsWith('9')) digits = digits.slice(1)
+    digits = digits.slice(0, 8)
+    if (digits.length === 0) {
+      setPhone('+56 9 ')
+      return
+    }
+    const first4 = digits.slice(0, 4)
+    const last4 = digits.slice(4)
+    const formatted = last4 ? `+56 9 ${first4} ${last4}` : `+56 9 ${first4}`
+    setPhone(formatted)
+  }
+
+  const handlePhoneKeyDown = (e) => {
+    const allowed = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab']
+    if (allowed.includes(e.key)) return
+    if (!/^[0-9]$/.test(e.key)) return
+    const currentDigits = (phone || '').replace(/\D/g, '')
+    let rest = currentDigits
+    if (rest.startsWith('56')) rest = rest.slice(2)
+    if (rest.startsWith('9')) rest = rest.slice(1)
+    if (rest.length >= 8) {
+      e.preventDefault()
+    }
+  }
+
+  const handlePhonePaste = (e) => {
+    e.preventDefault()
+    const paste = (e.clipboardData || window.clipboardData).getData('Text') || ''
+    const pasteDigits = paste.replace(/\D/g, '')
+    const currentDigits = (phone || '').replace(/\D/g, '')
+    let rest = currentDigits
+    if (rest.startsWith('56')) rest = rest.slice(2)
+    if (rest.startsWith('9')) rest = rest.slice(1)
+    const combined = (rest + pasteDigits).slice(0, 8)
+    if (combined.length === 0) {
+      setPhone('+56 9 ')
+      return
+    }
+    const first4 = combined.slice(0, 4)
+    const last4 = combined.slice(4)
+    const formatted = last4 ? `+56 9 ${first4} ${last4}` : `+56 9 ${first4}`
+    setPhone(formatted)
   }
 
   const handleFileChange = (file) => {
@@ -198,7 +264,11 @@ export default function Profile(){
                     placeholder="+56 9 1234 5678"
                     className="mt-1 w-full rounded border px-3 py-2"
                     value={phone}
-                    onChange={e => setPhone(e.target.value)}
+                    onChange={handlePhoneChange}
+                    onKeyDown={handlePhoneKeyDown}
+                    onPaste={handlePhonePaste}
+                    onFocus={() => { if (!phone || phone.trim() === '') setPhone('+56 9 ') }}
+                    onBlur={() => { if (phone === '+56 9 ') setPhone('') }}
                   />
                 </div>
 

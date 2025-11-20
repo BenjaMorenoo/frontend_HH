@@ -5,7 +5,12 @@ function getAuthToken() {
 }
 
 function setAuthToken(token) {
-  if (token) localStorage.setItem('pb_token', token)
+  if (!token) return
+  try {
+    localStorage.setItem('pb_token', token)
+  } catch (e) {
+    // ignore storage errors (quota, privacy modes)
+  }
 }
 
 function clearAuthToken() {

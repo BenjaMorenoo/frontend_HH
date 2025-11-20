@@ -1,0 +1,194 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Navbar snapshot > matches snapshot (desktop + mobile collapsed) 1`] = `
+<div>
+  <header
+    class="bg-white shadow-md"
+  >
+    <div
+      class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+    >
+      <div
+        class="flex items-center justify-between h-16"
+      >
+        <div
+          class="flex items-center gap-4"
+        >
+          <img
+            alt="Logo"
+            class="h-12 w-auto"
+            src="/src/assets/Nuevo_logo_cambiar.png"
+          />
+        </div>
+        <div
+          class="flex items-center"
+        >
+          <nav
+            class="hidden md:flex md:items-center md:space-x-6"
+          >
+            <a
+              class="hover:underline"
+              href="/"
+            >
+              Inicio
+            </a>
+            <a
+              class="hover:underline"
+              href="/products"
+            >
+              Productos
+            </a>
+            <a
+              class="hover:underline"
+              href="/blog"
+            >
+              Blog
+            </a>
+            <a
+              class="hover:underline"
+              href="/contact"
+            >
+              Contacto
+            </a>
+            <a
+              class="hover:underline"
+              href="/about"
+            >
+              Acerca de
+            </a>
+          </nav>
+          <form
+            class="hidden md:block ml-4"
+          >
+            <input
+              class="border border-gray-300 rounded py-2 px-3 w-64 focus:outline-none"
+              placeholder="Buscar Producto"
+              value=""
+            />
+          </form>
+          <div
+            class="flex items-center gap-3 ml-4"
+          >
+            <button
+              class="relative bg-white text-black py-2 px-3 rounded font-bold"
+            >
+              <span
+                class="hidden sm:inline"
+              >
+                Carrito
+              </span>
+            </button>
+            <div
+              class="hidden md:flex items-center gap-2"
+            >
+              <a
+                class="bg-white text-black py-2 px-3 rounded font-bold"
+                href="/login"
+              >
+                Iniciar Sesión
+              </a>
+              <a
+                class="bg-green-500 text-white py-2 px-3 rounded font-bold"
+                href="/register"
+              >
+                Registrarse
+              </a>
+            </div>
+            <button
+              aria-label="Abrir menú"
+              class="md:hidden ml-2 p-2 rounded hover:bg-gray-100"
+            >
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4 6h16M4 12h16M4 18h16"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="hidden md:hidden pb-4"
+      >
+        <div
+          class="space-y-2"
+        >
+          <a
+            class="block px-3 py-2 rounded hover:bg-gray-100"
+            href="/"
+          >
+            Inicio
+          </a>
+          <a
+            class="block px-3 py-2 rounded hover:bg-gray-100"
+            href="/products"
+          >
+            Productos
+          </a>
+          <a
+            class="block px-3 py-2 rounded hover:bg-gray-100"
+            href="/blog"
+          >
+            Blog
+          </a>
+          <a
+            class="block px-3 py-2 rounded hover:bg-gray-100"
+            href="/contact"
+          >
+            Contacto
+          </a>
+          <a
+            class="block px-3 py-2 rounded hover:bg-gray-100"
+            href="/about"
+          >
+            Acerca de
+          </a>
+          <form
+            class="px-3 py-2"
+          >
+            <input
+              class="w-full border border-gray-300 rounded py-2 px-3"
+              placeholder="Buscar Producto"
+              value=""
+            />
+          </form>
+          <div
+            class="px-3 space-y-2"
+          >
+            <button
+              class="w-full text-left py-2 px-3 rounded hover:bg-gray-100"
+            >
+              Carrito 
+            </button>
+            <div
+              class="space-y-2"
+            >
+              <a
+                class="block py-2 px-3 rounded hover:bg-gray-100"
+                href="/login"
+              >
+                Iniciar Sesión
+              </a>
+              <a
+                class="block py-2 px-3 rounded bg-green-500 text-white"
+                href="/register"
+              >
+                Registrarse
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+`;

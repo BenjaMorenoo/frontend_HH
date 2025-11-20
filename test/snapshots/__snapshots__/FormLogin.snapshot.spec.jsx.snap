@@ -1,0 +1,170 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FormLogin snapshot > matches snapshot 1`] = `
+<div>
+  <div
+    class="flex min-h-screen items-center justify-center bg-gray-100 px-4"
+  >
+    <div
+      class="w-full max-w-sm rounded-2xl bg-white p-6 shadow-lg"
+    >
+      <h2
+        class="mb-4 text-center text-2xl font-semibold text-gray-800"
+      >
+        Iniciar sesión
+      </h2>
+      <form
+        class="space-y-4"
+      >
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="email"
+          >
+            Correo Electrónico
+          </label>
+          <div
+            class="relative mt-1"
+          >
+            <span
+              class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"
+            >
+              <img
+                alt="IconCorreo"
+                class="h-4 w-4"
+                src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='utf-8'?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20width='800px'%20height='800px'%20viewBox='0%200%2048%2048'%20id='Layer_2'%20data-name='Layer%202'%20xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3cstyle%3e.cls-1{fill:none;stroke:%23000000;stroke-linecap:round;stroke-linejoin:round;}%3c/style%3e%3c/defs%3e%3cpath%20class='cls-1'%20d='M6.47,10.71a2,2,0,0,0-2,2h0V35.32a2,2,0,0,0,2,2H41.53a2,2,0,0,0,2-2h0V12.68a2,2,0,0,0-2-2H6.47Zm33.21,3.82L24,26.07,8.32,14.53'/%3e%3c/svg%3e"
+              />
+            </span>
+            <input
+              class="w-full rounded-lg border border-gray-300 py-2.5 pl-10 pr-3 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-100"
+              id="email"
+              placeholder="@email.com"
+              type="email"
+              value=""
+            />
+          </div>
+        </div>
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700"
+            for="password"
+          >
+            Contraseña
+          </label>
+          <div
+            class="relative mt-1"
+          >
+            <span
+              class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"
+            >
+              <img
+                alt="IconCorreo"
+                class="h-4 w-4"
+                src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='utf-8'?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20width='800px'%20height='800px'%20viewBox='0%200%2048%2048'%20xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3cstyle%3e.a{fill:none;stroke:%23000000;stroke-linecap:round;stroke-linejoin:round;}%3c/style%3e%3c/defs%3e%3cpath%20class='a'%20d='M24,25.28a3.26,3.26,0,0,0-1.64,6.07V36h3.32V31.35a3.28,3.28,0,0,0,1.61-2.8v0A3.27,3.27,0,0,0,24,25.28Z'/%3e%3crect%20class='a'%20x='7.38'%20y='17.77'%20width='33.23'%20height='25.73'%20rx='4.32'/%3e%3cpath%20class='a'%20d='M13.35,17.77V15.16a10.66,10.66,0,0,1,21.32,0v2.61'/%3e%3c/svg%3e"
+              />
+            </span>
+            <input
+              class="w-full rounded-lg border border-gray-300 py-2.5 pl-10 pr-10 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-100"
+              id="password"
+              placeholder="contraseña"
+              type="password"
+              value=""
+            />
+            <button
+              aria-label="Mostrar contraseña"
+              class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500"
+              type="button"
+            >
+              <img
+                alt="IconCorreo"
+                class="h-4 w-4"
+                src="data:image/svg+xml,%3c?xml%20version='1.0'%20?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20width='800px'%20height='800px'%20viewBox='0%200%2028%2028'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20clip-rule='evenodd'%20d='M22.6928%201.55018C22.3102%201.32626%2021.8209%201.45915%2021.6%201.84698L19.1533%206.14375C17.4864%205.36351%2015.7609%204.96457%2014.0142%204.96457C9.32104%204.96457%204.781%207.84644%201.11993%2013.2641L1.10541%2013.2854L1.09271%2013.3038C0.970762%2013.4784%200.967649%2013.6837%201.0921%2013.8563C3.79364%2017.8691%206.97705%2020.4972%2010.3484%2021.6018L8.39935%2025.0222C8.1784%2025.4101%208.30951%2025.906%208.69214%2026.1299L9.03857%2026.3326C9.4212%2026.5565%209.91046%2026.4237%2010.1314%2026.0358L23.332%202.86058C23.553%202.47275%2023.4219%201.97684%2023.0392%201.75291L22.6928%201.55018ZM18.092%208.00705C16.7353%207.40974%2015.3654%207.1186%2014.0142%207.1186C10.6042%207.1186%207.07416%208.97311%203.93908%2012.9239C3.63812%2013.3032%203.63812%2013.8561%203.93908%2014.2354C6.28912%2017.197%208.86102%2018.9811%2011.438%2019.689L12.7855%2017.3232C11.2462%2016.8322%209.97333%2015.4627%209.97333%2013.5818C9.97333%2011.2026%2011.7969%209.27368%2014.046%209.27368C15.0842%209.27368%2016.0317%209.68468%2016.7511%2010.3612L18.092%208.00705ZM15.639%2012.3137C15.2926%2011.7767%2014.7231%2011.4277%2014.046%2011.4277C12.9205%2011.4277%2012%2012.3906%2012%2013.5802C12%2014.3664%2012.8432%2015.2851%2013.9024%2015.3624L15.639%2012.3137Z'%20fill='%23000000'%20fill-rule='evenodd'/%3e%3cpath%20d='M14.6873%2022.1761C19.1311%2021.9148%2023.4056%2019.0687%2026.8864%2013.931C26.9593%2013.8234%2027%2013.7121%2027%2013.5797C27%2013.4535%2026.965%2013.3481%2026.8956%2013.2455C25.5579%2011.2677%2024.1025%209.62885%2022.5652%208.34557L21.506%2010.2052C22.3887%2010.9653%2023.2531%2011.87%2024.0894%2012.9239C24.3904%2013.3032%2024.3904%2013.8561%2024.0894%2014.2354C21.5676%2017.4135%2018.7903%2019.2357%2016.0254%2019.827L14.6873%2022.1761Z'%20fill='%23000000'/%3e%3c/svg%3e"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="flex items-center justify-between text-sm"
+        >
+          <label
+            class="inline-flex items-center space-x-2"
+          >
+            <input
+              class="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+              type="checkbox"
+            />
+            <span>
+              Recordarme
+            </span>
+          </label>
+          <a
+            class="text-sm text-gray-600 hover:underline"
+            href="#"
+          >
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
+        <button
+          class="w-full rounded-md bg-green-600 py-2.5 font-medium text-white hover:bg-green-700 transition"
+          type="submit"
+        >
+          Iniciar Sesión
+        </button>
+        <div
+          class="flex items-center gap-3"
+        >
+          <hr
+            class="flex-1 border-gray-300"
+          />
+          <span
+            class="text-xs text-gray-500"
+          >
+            O continúa con
+          </span>
+          <hr
+            class="flex-1 border-gray-300"
+          />
+        </div>
+        <div
+          class="grid grid-cols-2 gap-3"
+        >
+          <button
+            class="flex items-center justify-center gap-2 rounded-md border border-gray-300 bg-white py-2 text-sm hover:bg-gray-50"
+            type="button"
+          >
+            <img
+              alt="Google"
+              class="h-4 w-4"
+              src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'%20standalone='no'?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20width='800px'%20height='800px'%20viewBox='-0.5%200%2048%2048'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3ctitle%3eGoogle-color%3c/title%3e%3cdesc%3eCreated%20with%20Sketch.%3c/desc%3e%3cdefs%3e%3c/defs%3e%3cg%20id='Icons'%20stroke='none'%20stroke-width='1'%20fill='none'%20fill-rule='evenodd'%3e%3cg%20id='Color-'%20transform='translate(-401.000000,%20-860.000000)'%3e%3cg%20id='Google'%20transform='translate(401.000000,%20860.000000)'%3e%3cpath%20d='M9.82727273,24%20C9.82727273,22.4757333%2010.0804318,21.0144%2010.5322727,19.6437333%20L2.62345455,13.6042667%20C1.08206818,16.7338667%200.213636364,20.2602667%200.213636364,24%20C0.213636364,27.7365333%201.081,31.2608%202.62025,34.3882667%20L10.5247955,28.3370667%20C10.0772273,26.9728%209.82727273,25.5168%209.82727273,24'%20id='Fill-1'%20fill='%23FBBC05'%3e%3c/path%3e%3cpath%20d='M23.7136364,10.1333333%20C27.025,10.1333333%2030.0159091,11.3066667%2032.3659091,13.2266667%20L39.2022727,6.4%20C35.0363636,2.77333333%2029.6954545,0.533333333%2023.7136364,0.533333333%20C14.4268636,0.533333333%206.44540909,5.84426667%202.62345455,13.6042667%20L10.5322727,19.6437333%20C12.3545909,14.112%2017.5491591,10.1333333%2023.7136364,10.1333333'%20id='Fill-2'%20fill='%23EB4335'%3e%3c/path%3e%3cpath%20d='M23.7136364,37.8666667%20C17.5491591,37.8666667%2012.3545909,33.888%2010.5322727,28.3562667%20L2.62345455,34.3946667%20C6.44540909,42.1557333%2014.4268636,47.4666667%2023.7136364,47.4666667%20C29.4455,47.4666667%2034.9177955,45.4314667%2039.0249545,41.6181333%20L31.5177727,35.8144%20C29.3995682,37.1488%2026.7323182,37.8666667%2023.7136364,37.8666667'%20id='Fill-3'%20fill='%2334A853'%3e%3c/path%3e%3cpath%20d='M46.1454545,24%20C46.1454545,22.6133333%2045.9318182,21.12%2045.6113636,19.7333333%20L23.7136364,19.7333333%20L23.7136364,28.8%20L36.3181818,28.8%20C35.6879545,31.8912%2033.9724545,34.2677333%2031.5177727,35.8144%20L39.0249545,41.6181333%20C43.3393409,37.6138667%2046.1454545,31.6490667%2046.1454545,24'%20id='Fill-4'%20fill='%234285F4'%3e%3c/path%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e"
+            />
+            Google
+          </button>
+          <button
+            class="flex items-center justify-center gap-2 rounded-md border border-gray-300 bg-white py-2 text-sm hover:bg-gray-50"
+            type="button"
+          >
+            <img
+              alt="Facebook"
+              class="h-4 w-4"
+              src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='utf-8'?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20width='800px'%20height='800px'%20viewBox='0%200%2016%2016'%20xmlns='http://www.w3.org/2000/svg'%20fill='none'%3e%3cpath%20fill='%231877F2'%20d='M15%208a7%207%200%2000-7-7%207%207%200%2000-1.094%2013.915v-4.892H5.13V8h1.777V6.458c0-1.754%201.045-2.724%202.644-2.724.766%200%201.567.137%201.567.137v1.723h-.883c-.87%200-1.14.54-1.14%201.093V8h1.941l-.31%202.023H9.094v4.892A7.001%207.001%200%200015%208z'/%3e%3cpath%20fill='%23ffffff'%20d='M10.725%2010.023L11.035%208H9.094V6.687c0-.553.27-1.093%201.14-1.093h.883V3.87s-.801-.137-1.567-.137c-1.6%200-2.644.97-2.644%202.724V8H5.13v2.023h1.777v4.892a7.037%207.037%200%20002.188%200v-4.892h1.63z'/%3e%3c/svg%3e"
+            />
+            Facebook
+          </button>
+        </div>
+      </form>
+      <p
+        class="mt-4 text-center text-sm text-gray-500"
+      >
+        ¿No tienes cuenta?
+         
+        <a
+          class="font-medium text-green-600 hover:underline"
+          href="#"
+        >
+          Regístrate
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+`;
