@@ -111,6 +111,26 @@ exports[`Navbar snapshot > matches snapshot (desktop + mobile collapsed) 1`] = `
             >
               <a
                 class="hh-nav-link"
+                href="/orders"
+              >
+                <span
+                  class="hover:underline"
+                >
+                  Mis compras
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="hh-icon"
+                >
+                  🏡
+                </span>
+              </a>
+            </div>
+            <div
+              class="px-3"
+            >
+              <a
+                class="hh-nav-link"
                 href="/about"
               >
                 <span

@@ -67,7 +67,9 @@ const Navbar = () => {
               <div className='px-3'><a href="/products" className='hh-nav-link'><span className='hover:underline'>Productos</span><span className='hh-icon' aria-hidden>🥕</span></a></div>
               <div className='px-3'><a href="/blog" className='hh-nav-link'><span className='hover:underline'>Blog</span><span className='hh-icon' aria-hidden>📰</span></a></div>
               <div className='px-3'><a href="/contact" className='hh-nav-link'><span className='hover:underline'>Contacto</span><span className='hh-icon' aria-hidden>✉️</span></a></div>
+              <div className='px-3'><a href="/orders" className='hh-nav-link'><span className='hover:underline'>Mis compras</span><span className='hh-icon' aria-hidden>🏡</span></a></div>
               <div className='px-3'><a href="/about" className='hh-nav-link'><span className='hover:underline'>Acerca de</span><span className='hh-icon' aria-hidden>🏡</span></a></div>
+
               {isAdmin && <div className='px-3'><Link to="/admin" className='hover:underline'>Admin</Link></div>}
             </nav>
 
