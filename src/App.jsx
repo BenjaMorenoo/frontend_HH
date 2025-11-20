@@ -4,11 +4,14 @@ import About from "./pages/About"
 import Contact from "./pages/Contact"
 import Products from "./pages/Products"
 import Blog from "./pages/Blog"
+import CreatePost from "./pages/CreatePost"
+import Post from "./pages/Post"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Profile from "./pages/Profile"
 import Checkout from "./pages/Checkout"
 import Orders from "./pages/Orders"
+import AdminDashboard from "./pages/AdminDashboard"
 import { CartProvider } from "./context/CartContext"
 import { AuthProvider } from "./context/AuthContext"
 import CartPanel from "./components/CartPanel"
@@ -29,8 +32,11 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/new" element={<CreatePost />} />
+            <Route path="/blog/:id" element={<Post />} />
             <Route path="/products" element={<Products />} />
             <Route path="/orders" element={<Orders />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register/>} />

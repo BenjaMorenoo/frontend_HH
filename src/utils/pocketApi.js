@@ -76,12 +76,19 @@ export async function createRecordForm(collection, formData) {
     headers,
     body: formData,
   })
+  const text = await res.text()
   if (!res.ok) {
-    const text = await res.text()
-    throw new Error(`${res.status} ${res.statusText} - ${text}`)
+    // try to parse JSON error body for better messages
+    let parsed = null
+    try { parsed = JSON.parse(text || '{}') } catch (e) { /* ignore */ }
+    const msg = parsed && parsed.message ? parsed.message : text
+    let hint = ''
+    if (res.status === 400 && parsed && parsed.data) {
+      hint = `\nField errors: ${JSON.stringify(parsed.data)}`
+    }
+    throw new Error(`${res.status} ${res.statusText} - ${msg}${hint}`)
   }
-  const txt = await res.text()
-  return txt ? JSON.parse(txt) : {}
+  return text ? JSON.parse(text) : {}
 }
 
 export async function updateRecord(collection, id, body) {
