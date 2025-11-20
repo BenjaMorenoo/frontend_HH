@@ -258,7 +258,7 @@ import facebookIcon from "../assets/facebook-svgrepo-com.svg";
 import instagramIcon from "../assets/instagram-1-svgrepo-com.svg";
 import xIcon from "../assets/X_logo_2023_original.svg";
 import logo from '../assets/Nuevo_logo_cambiar.png'
-import logo2 from '../assets/logo.png'
+import { Link } from 'react-router-dom'
 &nbsp;
 const Footer = () =&gt; {
   return (
@@ -267,7 +267,7 @@ const Footer = () =&gt; {
         &lt;div className="grid grid-cols-1 md:grid-cols-4 gap-8"&gt;
           &lt;div&gt;
             {/*&lt;h3 className="text-white text-2xl font-bold"&gt;HuertoHogar&lt;/h3&gt;*/}
-            &lt;img src={logo2} alt="Logo" className="h-16 w-auto mr-6" /&gt;
+            &lt;img src={logo} alt="HuertoHogar" className="h-16 w-auto mr-6 bg-transparent" /&gt;
             &lt;p className="mt-4 text-sm text-slate-400"&gt;Tu tienda online de productos orgánicos frescos. Conectamos directamente a productores locales con tu hogar para ofrecerte la mejor calidad.&lt;/p&gt;
 &nbsp;
             &lt;div className="flex items-center space-x-3 mt-4"&gt;
@@ -288,22 +288,22 @@ const Footer = () =&gt; {
           &lt;div&gt;
             &lt;h4 className="text-white font-semibold mb-4"&gt;Enlaces Rápidos&lt;/h4&gt;
             &lt;ul className="space-y-2 text-sm text-slate-400"&gt;
-              &lt;li&gt;&lt;a href="#" className="hover:underline"&gt;Inicio&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a href="#" className="hover:underline"&gt;Productos&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a href="#" className="hover:underline"&gt;Blog&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a href="#" className="hover:underline"&gt;Acerca de Nosotros&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a href="#" className="hover:underline"&gt;Contacto&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;Link to="/" className="hover:underline"&gt;Inicio&lt;/Link&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;Link to="/products" className="hover:underline"&gt;Productos&lt;/Link&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;Link to="/blog" className="hover:underline"&gt;Blog&lt;/Link&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;Link to="/about" className="hover:underline"&gt;Acerca de Nosotros&lt;/Link&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;Link to="/contact" className="hover:underline"&gt;Contacto&lt;/Link&gt;&lt;/li&gt;
             &lt;/ul&gt;
           &lt;/div&gt;
 &nbsp;
           &lt;div&gt;
             &lt;h4 className="text-white font-semibold mb-4"&gt;Categorías&lt;/h4&gt;
             &lt;ul className="space-y-2 text-sm text-slate-400"&gt;
-              &lt;li&gt;&lt;a href="#" className="hover:underline"&gt;Verduras&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a href="#" className="hover:underline"&gt;Frutas&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a href="#" className="hover:underline"&gt;Hierbas&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a href="#" className="hover:underline"&gt;Lácteos&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a href="#" className="hover:underline"&gt;Granos&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;Link to="/products?category=Verduras" className="hover:underline"&gt;Verduras&lt;/Link&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;Link to="/products?category=Frutas" className="hover:underline"&gt;Frutas&lt;/Link&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;Link to="/products?category=Hierbas" className="hover:underline"&gt;Hierbas&lt;/Link&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;Link to="/products?category=Lácteos" className="hover:underline"&gt;Lácteos&lt;/Link&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;Link to="/products?category=Granos" className="hover:underline"&gt;Granos&lt;/Link&gt;&lt;/li&gt;
             &lt;/ul&gt;
           &lt;/div&gt;
 &nbsp;
@@ -336,10 +336,10 @@ const Footer = () =&gt; {
 &nbsp;
         &lt;div className="border-t border-slate-800 mt-8 pt-6 flex flex-col md:flex-row items-center justify-between text-sm text-slate-400"&gt;
           &lt;p&gt;© {new Date().getFullYear()} HuertoHogar. Todos los derechos reservados.&lt;/p&gt;
-          &lt;div className="flex space-x-6 mt-4 md:mt-0"&gt;
-            &lt;a href="#" className="hover:underline"&gt;Política de Privacidad&lt;/a&gt;
-            &lt;a href="#" className="hover:underline"&gt;Términos de Servicio&lt;/a&gt;
-            &lt;a href="#" className="hover:underline"&gt;Política de Cookies&lt;/a&gt;
+            &lt;div className="flex space-x-6 mt-4 md:mt-0"&gt;
+            &lt;Link to="/privacy" className="hover:underline"&gt;Política de Privacidad&lt;/Link&gt;
+            &lt;Link to="/terms" className="hover:underline"&gt;Términos de Servicio&lt;/Link&gt;
+            &lt;Link to="/cookies" className="hover:underline"&gt;Política de Cookies&lt;/Link&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
@@ -355,7 +355,7 @@ export default Footer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-20T01:15:34.433Z
+                at 2025-11-20T17:57:46.617Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

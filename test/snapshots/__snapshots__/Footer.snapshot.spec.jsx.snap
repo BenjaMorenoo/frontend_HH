@@ -13,9 +13,9 @@ exports[`Footer snapshot > matches snapshot 1`] = `
       >
         <div>
           <img
-            alt="Logo"
-            class="h-16 w-auto mr-6"
-            src="/src/assets/logo.png"
+            alt="HuertoHogar"
+            class="h-16 w-auto mr-6 bg-transparent"
+            src="/src/assets/Nuevo_logo_cambiar.png"
           />
           <p
             class="mt-4 text-sm text-slate-400"
@@ -72,7 +72,8 @@ exports[`Footer snapshot > matches snapshot 1`] = `
             <li>
               <a
                 class="hover:underline"
-                href="#"
+                data-discover="true"
+                href="/"
               >
                 Inicio
               </a>
@@ -80,7 +81,8 @@ exports[`Footer snapshot > matches snapshot 1`] = `
             <li>
               <a
                 class="hover:underline"
-                href="#"
+                data-discover="true"
+                href="/products"
               >
                 Productos
               </a>
@@ -88,7 +90,8 @@ exports[`Footer snapshot > matches snapshot 1`] = `
             <li>
               <a
                 class="hover:underline"
-                href="#"
+                data-discover="true"
+                href="/blog"
               >
                 Blog
               </a>
@@ -96,7 +99,8 @@ exports[`Footer snapshot > matches snapshot 1`] = `
             <li>
               <a
                 class="hover:underline"
-                href="#"
+                data-discover="true"
+                href="/about"
               >
                 Acerca de Nosotros
               </a>
@@ -104,7 +108,8 @@ exports[`Footer snapshot > matches snapshot 1`] = `
             <li>
               <a
                 class="hover:underline"
-                href="#"
+                data-discover="true"
+                href="/contact"
               >
                 Contacto
               </a>
@@ -123,7 +128,8 @@ exports[`Footer snapshot > matches snapshot 1`] = `
             <li>
               <a
                 class="hover:underline"
-                href="#"
+                data-discover="true"
+                href="/products?category=Verduras"
               >
                 Verduras
               </a>
@@ -131,7 +137,8 @@ exports[`Footer snapshot > matches snapshot 1`] = `
             <li>
               <a
                 class="hover:underline"
-                href="#"
+                data-discover="true"
+                href="/products?category=Frutas"
               >
                 Frutas
               </a>
@@ -139,7 +146,8 @@ exports[`Footer snapshot > matches snapshot 1`] = `
             <li>
               <a
                 class="hover:underline"
-                href="#"
+                data-discover="true"
+                href="/products?category=Hierbas"
               >
                 Hierbas
               </a>
@@ -147,7 +155,8 @@ exports[`Footer snapshot > matches snapshot 1`] = `
             <li>
               <a
                 class="hover:underline"
-                href="#"
+                data-discover="true"
+                href="/products?category=Lácteos"
               >
                 Lácteos
               </a>
@@ -155,7 +164,8 @@ exports[`Footer snapshot > matches snapshot 1`] = `
             <li>
               <a
                 class="hover:underline"
-                href="#"
+                data-discover="true"
+                href="/products?category=Granos"
               >
                 Granos
               </a>
@@ -260,19 +270,22 @@ exports[`Footer snapshot > matches snapshot 1`] = `
         >
           <a
             class="hover:underline"
-            href="#"
+            data-discover="true"
+            href="/privacy"
           >
             Política de Privacidad
           </a>
           <a
             class="hover:underline"
-            href="#"
+            data-discover="true"
+            href="/terms"
           >
             Términos de Servicio
           </a>
           <a
             class="hover:underline"
-            href="#"
+            data-discover="true"
+            href="/cookies"
           >
             Política de Cookies
           </a>

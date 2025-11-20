@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/78</span>
+                <span class='fraction'>0/69</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/78</span>
+                <span class='fraction'>0/69</span>
             </div>
         
             
@@ -146,17 +146,20 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -174,6 +177,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -189,8 +193,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -198,6 +204,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -208,36 +215,29 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import React, { useEffect, useState } from 'react'</span></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { useEffect, useState } from 'react'<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
 <span class="cstat-no" title="statement not covered" >import Navbar from "../components/Navbar"</span>
 <span class="cstat-no" title="statement not covered" >import { Link } from 'react-router-dom'</span>
 <span class="cstat-no" title="statement not covered" >import { getRecords, fileUrl } from '../utils/pocketApi'</span>
 <span class="cstat-no" title="statement not covered" >import { useAuth } from '../context/AuthContext'</span>
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" >const Blog = () =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  const { isAuthenticated } = useAuth()</span>
 <span class="cstat-no" title="statement not covered" >  const [posts, setPosts] = useState([])</span>
 <span class="cstat-no" title="statement not covered" >  const [loading, setLoading] = useState(true)</span>
 <span class="cstat-no" title="statement not covered" >  const [error, setError] = useState(null)</span>
 <span class="cstat-no" title="statement not covered" >  const [filter, setFilter] = useState('all') // 'all' | 'recipe' | 'news'</span>
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    let mounted = true</span>
 <span class="cstat-no" title="statement not covered" >    async function load() {</span>
 <span class="cstat-no" title="statement not covered" >      setLoading(true)</span>
 <span class="cstat-no" title="statement not covered" >      try {</span>
-<span class="cstat-no" title="statement not covered" >        // build query: optional filter by type</span>
+        // build query: optional filter by type
 <span class="cstat-no" title="statement not covered" >        let q = '?sort=-created'</span>
 <span class="cstat-no" title="statement not covered" >        if (filter &amp;&amp; filter !== 'all') {</span>
 <span class="cstat-no" title="statement not covered" >          const f = encodeURIComponent(`type="${filter}"`)</span>
@@ -255,7 +255,7 @@
 <span class="cstat-no" title="statement not covered" >    load()</span>
 <span class="cstat-no" title="statement not covered" >    return () =&gt; { mounted = false }</span>
 <span class="cstat-no" title="statement not covered" >  }, [filter])</span>
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
 <span class="cstat-no" title="statement not covered" >    &lt;div&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;Navbar /&gt;</span>
@@ -271,18 +271,18 @@
 <span class="cstat-no" title="statement not covered" >              {isAuthenticated &amp;&amp; &lt;Link to="/blog/new" className="bg-green-600 text-white px-3 py-2 rounded"&gt;Crear publicación&lt;/Link&gt;}</span>
 <span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" >        {loading &amp;&amp; &lt;div&gt;Cargando publicaciones...&lt;/div&gt;}</span>
 <span class="cstat-no" title="statement not covered" >        {error &amp;&amp; &lt;div className="text-red-600"&gt;{error}&lt;/div&gt;}</span>
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" >        &lt;div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6"&gt;</span>
 <span class="cstat-no" title="statement not covered" >          {posts.map(p =&gt; (</span>
 <span class="cstat-no" title="statement not covered" >            &lt;article key={p.id} className="bg-white rounded shadow-sm overflow-hidden flex flex-col h-full"&gt;</span>
 <span class="cstat-no" title="statement not covered" >              {p.cover &amp;&amp; (</span>
-<span class="cstat-no" title="statement not covered" >                &lt;div className="w-full"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                  &lt;img src={fileUrl('posts', p.id, p.cover)} alt={p.title} className="w-full h-40 md:h-48 lg:h-56 object-cover" /&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;div className="h-40 w-full flex items-center justify-center overflow-hidden bg-gray-100"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                  &lt;img src={fileUrl('posts', p.id, p.cover)} alt={p.title} className="h-full w-auto max-w-full object-contain mx-auto" /&gt;</span>
 <span class="cstat-no" title="statement not covered" >                &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >              )}</span>
+              )}
 <span class="cstat-no" title="statement not covered" >              &lt;div className="p-4 flex-1 flex flex-col"&gt;</span>
 <span class="cstat-no" title="statement not covered" >                &lt;h3 className="text-lg md:text-xl font-medium"&gt;&lt;Link to={`/blog/${p.id}`}&gt;{p.title}&lt;/Link&gt;&lt;/h3&gt;</span>
 <span class="cstat-no" title="statement not covered" >                &lt;p className="text-sm md:text-base text-gray-600 mt-2 flex-1"&gt;{p.excerpt || (p.content || '').slice(0,120) + '...'}&lt;/p&gt;</span>
@@ -293,9 +293,9 @@
 <span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >  )</span>
+  )
 <span class="cstat-no" title="statement not covered" >}</span>
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" >export default Blog</span>
 &nbsp;</pre></td></tr></table></pre>
 
@@ -304,7 +304,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-20T01:15:34.433Z
+                at 2025-11-20T17:57:46.617Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

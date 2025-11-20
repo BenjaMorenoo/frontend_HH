@@ -1,7 +1,7 @@
 import { vi } from 'vitest'
 // mock useCart with a spy for setCartOpen (use .jsx path so tests resolve)
 let setCartOpenSpy = vi.fn()
-let mockUseCart = () => ({ setCartOpen: setCartOpenSpy, cartCount: 5 })
+let mockUseCart = () => ({ setCartOpen: setCartOpenSpy, cartCount: 5, displayCartCount: '5' })
 vi.mock('../../src/context/CartContext.jsx', () => ({ useCart: () => mockUseCart() }))
 
 import React from 'react'
@@ -12,12 +12,12 @@ describe('FloatingCartButton behavior', () => {
   beforeEach(() => {
     setCartOpenSpy = vi.fn()
     // update factory to return new spy
-    mockUseCart = () => ({ setCartOpen: setCartOpenSpy, cartCount: 5 })
+    mockUseCart = () => ({ setCartOpen: setCartOpenSpy, cartCount: 5, displayCartCount: '5' })
   })
 
   it('shows badge when cartCount > 0 and calls setCartOpen on click', () => {
     const { container, getByRole } = render(<FloatingCartButton />)
-    const badge = container.querySelector('span.absolute')
+    const badge = container.querySelector('span.bg-red-500')
     expect(badge).toBeTruthy()
     expect(badge.textContent).toBe('5')
 

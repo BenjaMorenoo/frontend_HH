@@ -12,7 +12,7 @@ exports[`Navbar snapshot > matches snapshot (desktop + mobile collapsed) 1`] = `
         class="flex items-center justify-between h-16"
       >
         <div
-          class="flex items-center gap-4"
+          class="flex items-center gap-4 mr-6 md:mr-8"
         >
           <img
             alt="Logo"
@@ -24,38 +24,108 @@ exports[`Navbar snapshot > matches snapshot (desktop + mobile collapsed) 1`] = `
           class="flex items-center"
         >
           <nav
-            class="hidden md:flex md:items-center md:space-x-6"
+            class="hidden md:flex md:items-center divide-x divide-gray-200"
           >
-            <a
-              class="hover:underline"
-              href="/"
+            <div
+              class="px-3"
             >
-              Inicio
-            </a>
-            <a
-              class="hover:underline"
-              href="/products"
+              <a
+                class="hh-nav-link"
+                href="/"
+              >
+                <span
+                  class="hover:underline"
+                >
+                  Inicio
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="hh-icon"
+                >
+                  🌱
+                </span>
+              </a>
+            </div>
+            <div
+              class="px-3"
             >
-              Productos
-            </a>
-            <a
-              class="hover:underline"
-              href="/blog"
+              <a
+                class="hh-nav-link"
+                href="/products"
+              >
+                <span
+                  class="hover:underline"
+                >
+                  Productos
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="hh-icon"
+                >
+                  🥕
+                </span>
+              </a>
+            </div>
+            <div
+              class="px-3"
             >
-              Blog
-            </a>
-            <a
-              class="hover:underline"
-              href="/contact"
+              <a
+                class="hh-nav-link"
+                href="/blog"
+              >
+                <span
+                  class="hover:underline"
+                >
+                  Blog
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="hh-icon"
+                >
+                  📰
+                </span>
+              </a>
+            </div>
+            <div
+              class="px-3"
             >
-              Contacto
-            </a>
-            <a
-              class="hover:underline"
-              href="/about"
+              <a
+                class="hh-nav-link"
+                href="/contact"
+              >
+                <span
+                  class="hover:underline"
+                >
+                  Contacto
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="hh-icon"
+                >
+                  ✉️
+                </span>
+              </a>
+            </div>
+            <div
+              class="px-3"
             >
-              Acerca de
-            </a>
+              <a
+                class="hh-nav-link"
+                href="/about"
+              >
+                <span
+                  class="hover:underline"
+                >
+                  Acerca de
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="hh-icon"
+                >
+                  🏡
+                </span>
+              </a>
+            </div>
           </nav>
           <form
             class="hidden md:block ml-4"
@@ -69,30 +139,52 @@ exports[`Navbar snapshot > matches snapshot (desktop + mobile collapsed) 1`] = `
           <div
             class="flex items-center gap-3 ml-4"
           >
-            <button
-              class="relative bg-white text-black py-2 px-3 rounded font-bold"
-            >
-              <span
-                class="hidden sm:inline"
-              >
-                Carrito
-              </span>
-            </button>
             <div
-              class="hidden md:flex items-center gap-2"
+              class="hidden md:flex items-center divide-x divide-gray-200"
             >
-              <a
-                class="bg-white text-black py-2 px-3 rounded font-bold"
-                href="/login"
+              <div
+                class="pr-3 flex items-center"
               >
-                Iniciar Sesión
-              </a>
-              <a
-                class="bg-green-500 text-white py-2 px-3 rounded font-bold"
-                href="/register"
+                <button
+                  aria-label="Abrir carrito"
+                  class="relative bg-white text-black py-2 px-3 rounded font-bold cursor-pointer flex items-center justify-center"
+                >
+                  <span
+                    aria-hidden="true"
+                    class="text-lg"
+                  >
+                    🛒
+                  </span>
+                </button>
+              </div>
+              <div
+                class="px-3 pl-4 flex items-center"
               >
-                Registrarse
-              </a>
+                <a
+                  class="hh-nav-link"
+                  href="/login"
+                >
+                  <span
+                    class="hover:underline"
+                  >
+                    Iniciar Sesión
+                  </span>
+                </a>
+              </div>
+              <div
+                class="pl-3 flex items-center"
+              >
+                <a
+                  class="hh-nav-link bg-green-500 text-white px-3 py-1 rounded"
+                  href="/register"
+                >
+                  <span
+                    class="hover:underline"
+                  >
+                    Registrarse
+                  </span>
+                </a>
+              </div>
             </div>
             <button
               aria-label="Abrir menú"
@@ -123,34 +215,84 @@ exports[`Navbar snapshot > matches snapshot (desktop + mobile collapsed) 1`] = `
           class="space-y-2"
         >
           <a
-            class="block px-3 py-2 rounded hover:bg-gray-100"
+            class="block px-3 py-2 rounded hover:bg-gray-100 hh-nav-link"
             href="/"
           >
-            Inicio
+            <span
+              class="hover:underline"
+            >
+              Inicio
+            </span>
+            <span
+              aria-hidden="true"
+              class="hh-icon"
+            >
+              🌱
+            </span>
           </a>
           <a
-            class="block px-3 py-2 rounded hover:bg-gray-100"
+            class="block px-3 py-2 rounded hover:bg-gray-100 hh-nav-link"
             href="/products"
           >
-            Productos
+            <span
+              class="hover:underline"
+            >
+              Productos
+            </span>
+            <span
+              aria-hidden="true"
+              class="hh-icon"
+            >
+              🥕
+            </span>
           </a>
           <a
-            class="block px-3 py-2 rounded hover:bg-gray-100"
+            class="block px-3 py-2 rounded hover:bg-gray-100 hh-nav-link"
             href="/blog"
           >
-            Blog
+            <span
+              class="hover:underline"
+            >
+              Blog
+            </span>
+            <span
+              aria-hidden="true"
+              class="hh-icon"
+            >
+              📰
+            </span>
           </a>
           <a
-            class="block px-3 py-2 rounded hover:bg-gray-100"
+            class="block px-3 py-2 rounded hover:bg-gray-100 hh-nav-link"
             href="/contact"
           >
-            Contacto
+            <span
+              class="hover:underline"
+            >
+              Contacto
+            </span>
+            <span
+              aria-hidden="true"
+              class="hh-icon"
+            >
+              ✉️
+            </span>
           </a>
           <a
-            class="block px-3 py-2 rounded hover:bg-gray-100"
+            class="block px-3 py-2 rounded hover:bg-gray-100 hh-nav-link"
             href="/about"
           >
-            Acerca de
+            <span
+              class="hover:underline"
+            >
+              Acerca de
+            </span>
+            <span
+              aria-hidden="true"
+              class="hh-icon"
+            >
+              🏡
+            </span>
           </a>
           <form
             class="px-3 py-2"
@@ -173,13 +315,13 @@ exports[`Navbar snapshot > matches snapshot (desktop + mobile collapsed) 1`] = `
               class="space-y-2"
             >
               <a
-                class="block py-2 px-3 rounded hover:bg-gray-100"
+                class="block py-2 px-3 hh-nav-link"
                 href="/login"
               >
                 Iniciar Sesión
               </a>
               <a
-                class="block py-2 px-3 rounded bg-green-500 text-white"
+                class="block py-2 px-3 hh-nav-link bg-green-500 text-white rounded"
                 href="/register"
               >
                 Registrarse
