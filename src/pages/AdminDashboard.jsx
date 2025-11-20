@@ -241,7 +241,7 @@ export default function AdminDashboard() {
       <Navbar />
       <div className="max-w-7xl mx-auto p-6">
         <div className='flex items-center justify-between mb-6'>
-          <h1 className="text-2xl font-semibold">Admin Dashboard</h1>
+          <h1 className="text-2xl font-semibold">Admin Dashboard <span className='ml-2 text-xl inline-block' aria-hidden>👨‍💻</span></h1>
             <div className='flex items-center gap-3'>
             <button onClick={() => setView('orders')} className={`py-1 px-3 rounded ${view==='orders' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-700'}`}>Pedidos</button>
             <button onClick={() => setView('products')} className={`py-1 px-3 rounded ${view==='products' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-700'}`}>Productos</button>
@@ -356,7 +356,7 @@ export default function AdminDashboard() {
                         <tr key={p.id} className='hover:bg-gray-50'>
                           <td className='px-4 py-3 flex items-center gap-3'>
                             <div className='w-12 h-12 bg-gray-100 rounded overflow-hidden flex items-center justify-center'>
-                              {p.image ? <img src={p.image} alt={p.title} className='w-full h-full object-cover'/> : <div className='text-xs text-gray-400'>No image</div>}
+                              {p.image ? <img src={p.image} alt={p.title} className='w-full h-full object-contain'/> : <div className='text-xs text-gray-400'>No image</div>}
                             </div>
                             <div>
                               <div className='font-medium'>{p.code || p.id} — {p.title}</div>

@@ -3,7 +3,7 @@ import facebookIcon from "../assets/facebook-svgrepo-com.svg";
 import instagramIcon from "../assets/instagram-1-svgrepo-com.svg";
 import xIcon from "../assets/X_logo_2023_original.svg";
 import logo from '../assets/Nuevo_logo_cambiar.png'
-import logo2 from '../assets/logo.png'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             {/*<h3 className="text-white text-2xl font-bold">HuertoHogar</h3>*/}
-            <img src={logo2} alt="Logo" className="h-16 w-auto mr-6" />
+            <img src={logo} alt="HuertoHogar" className="h-16 w-auto mr-6 bg-transparent" />
             <p className="mt-4 text-sm text-slate-400">Tu tienda online de productos orgánicos frescos. Conectamos directamente a productores locales con tu hogar para ofrecerte la mejor calidad.</p>
 
             <div className="flex items-center space-x-3 mt-4">
@@ -33,22 +33,22 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-semibold mb-4">Enlaces Rápidos</h4>
             <ul className="space-y-2 text-sm text-slate-400">
-              <li><a href="#" className="hover:underline">Inicio</a></li>
-              <li><a href="#" className="hover:underline">Productos</a></li>
-              <li><a href="#" className="hover:underline">Blog</a></li>
-              <li><a href="#" className="hover:underline">Acerca de Nosotros</a></li>
-              <li><a href="#" className="hover:underline">Contacto</a></li>
+              <li><Link to="/" className="hover:underline">Inicio</Link></li>
+              <li><Link to="/products" className="hover:underline">Productos</Link></li>
+              <li><Link to="/blog" className="hover:underline">Blog</Link></li>
+              <li><Link to="/about" className="hover:underline">Acerca de Nosotros</Link></li>
+              <li><Link to="/contact" className="hover:underline">Contacto</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-white font-semibold mb-4">Categorías</h4>
             <ul className="space-y-2 text-sm text-slate-400">
-              <li><a href="#" className="hover:underline">Verduras</a></li>
-              <li><a href="#" className="hover:underline">Frutas</a></li>
-              <li><a href="#" className="hover:underline">Hierbas</a></li>
-              <li><a href="#" className="hover:underline">Lácteos</a></li>
-              <li><a href="#" className="hover:underline">Granos</a></li>
+              <li><Link to="/products?category=Verduras" className="hover:underline">Verduras</Link></li>
+              <li><Link to="/products?category=Frutas" className="hover:underline">Frutas</Link></li>
+              <li><Link to="/products?category=Hierbas" className="hover:underline">Hierbas</Link></li>
+              <li><Link to="/products?category=Lácteos" className="hover:underline">Lácteos</Link></li>
+              <li><Link to="/products?category=Granos" className="hover:underline">Granos</Link></li>
             </ul>
           </div>
 
@@ -81,10 +81,10 @@ const Footer = () => {
 
         <div className="border-t border-slate-800 mt-8 pt-6 flex flex-col md:flex-row items-center justify-between text-sm text-slate-400">
           <p>© {new Date().getFullYear()} HuertoHogar. Todos los derechos reservados.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="hover:underline">Política de Privacidad</a>
-            <a href="#" className="hover:underline">Términos de Servicio</a>
-            <a href="#" className="hover:underline">Política de Cookies</a>
+            <div className="flex space-x-6 mt-4 md:mt-0">
+            <Link to="/privacy" className="hover:underline">Política de Privacidad</Link>
+            <Link to="/terms" className="hover:underline">Términos de Servicio</Link>
+            <Link to="/cookies" className="hover:underline">Política de Cookies</Link>
           </div>
         </div>
       </div>

@@ -1,1 +1,13 @@
 @import "tailwindcss";
+/* Small hover animation for nav items: a tiny plant icon slides up and fades in */
+.hh-nav-link{display:inline-flex;align-items:center;gap:0.45rem;position:relative}
+.hh-icon{display:inline-block;font-size:0.95rem;line-height:1;opacity:0;transform:translateY(6px) scale(0.9);transition:opacity .16s ease,transform .18s cubic-bezier(.2,.8,.2,1)}
+.hh-nav-link:hover .hh-icon,.hh-nav-link:focus .hh-icon{opacity:1;transform:translateY(-2px) scale(1)}
+.hh-nav-link:hover{transform:translateY(-1px)}
+.hh-icon-circle{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:9999px;background:rgba(34,197,94,0.08);box-shadow:0 0 0 1px rgba(34,197,94,0.06) inset}
+
+/* Ensure pointer cursor for interactive nav items */
+.hh-nav-link, .hh-nav-link a { cursor: pointer }
+
+/* Make native buttons show pointer cursor for consistency */
+button { cursor: pointer }
