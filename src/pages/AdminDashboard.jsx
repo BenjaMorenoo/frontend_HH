@@ -663,7 +663,7 @@ export default function AdminDashboard() {
                 </div>
 
                 <div className='overflow-x-auto bg-white rounded p-4'>
-                  <div className='text-sm font-medium mb-2'>DataTable Example</div>
+                  <div className='text-sm font-medium mb-2'>Tabla de datos</div>
                   <table className='min-w-full divide-y divide-gray-100'>
                     <thead className='bg-gray-50'>
                       <tr>
