@@ -62,7 +62,20 @@ export default function CartPanel() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <input type="number" min="1" value={item.qty} onChange={(e) => updateQty(item.id, Number(e.target.value))} className="w-14 rounded border px-2 py-1 text-sm" />
+                  <input
+                    type="number"
+                    min="1"
+                    value={item.qty}
+                    onChange={(e) => updateQty(item.id, Number(e.target.value))}
+                    onKeyDown={(e) => {
+                      // Allow only arrow keys and tab; block manual typing
+                      const allow = ['ArrowUp', 'ArrowDown', 'Tab', 'Home', 'End', 'PageUp', 'PageDown']
+                      if (!allow.includes(e.key)) e.preventDefault()
+                    }}
+                    onPaste={(e) => e.preventDefault()}
+                    onWheel={(e) => e.currentTarget.blur()}
+                    className="w-14 rounded border px-2 py-1 text-sm"
+                  />
                   <button onClick={() => removeFromCart(item.id)} className="text-sm text-red-500">Eliminar</button>
                 </div>
               </div>

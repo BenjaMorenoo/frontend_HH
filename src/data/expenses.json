@@ -1,0 +1,26 @@
+[
+  {
+    "id": "exp_rent",
+    "name": "Arriendo local",
+    "amount": 350000,
+    "frequency": "monthly"
+  },
+  {
+    "id": "exp_utilities",
+    "name": "Servicios (agua, luz, internet)",
+    "amount": 120000,
+    "frequency": "monthly"
+  },
+  {
+    "id": "exp_marketing",
+    "name": "Marketing",
+    "amount": 80000,
+    "frequency": "monthly"
+  },
+  {
+    "id": "exp_insurance",
+    "name": "Seguro",
+    "amount": 200000,
+    "frequency": "yearly"
+  }
+]

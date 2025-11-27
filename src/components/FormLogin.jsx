@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import facebookIcon from "../assets/facebook-svgrepo-com.svg";
 import googleIcon from "../assets/google-color-svgrepo-com.svg";
@@ -144,7 +144,7 @@ export default function LoginForm() {
 
         <p className="mt-4 text-center text-sm text-gray-500">
           ¿No tienes cuenta?{' '}
-          <a href="#" className="font-medium text-green-600 hover:underline">Regístrate</a>
+          <Link to="/register" className="font-medium text-green-600 hover:underline">Regístrate</Link>
         </p>
       </div>
     </div>

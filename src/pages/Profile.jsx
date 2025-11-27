@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useAuth } from '../context/AuthContext'
 import Navbar from '../components/Navbar'
 import { fileUrl } from '../utils/pocketApi'
@@ -35,6 +35,7 @@ export default function Profile(){
   const [address, setAddress] = useState(user?.address || '')
   const [avatarFile, setAvatarFile] = useState(null)
   const [avatarPreview, setAvatarPreview] = useState(null)
+  const fileInputRef = useRef(null)
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -211,29 +212,56 @@ export default function Profile(){
         <h1 className="text-2xl font-semibold mb-6">Mi perfil</h1>
 
         <div className="bg-white rounded shadow p-6">
-          <div className="md:grid md:grid-cols-3 md:gap-6">
-            <div className="md:col-span-1 flex flex-col items-center border-r pr-6">
-              <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
-                {avatarPreview ? (
-                  <img src={avatarPreview} alt="Preview avatar" className="w-full h-full object-cover" />
-                ) : (
-                  (() => {
-                    const url = currentAvatarUrl()
-                    return url ? (
-                      <img src={url} alt="Avatar" className="w-full h-full object-cover" />
-                    ) : (
-                      <span className="text-gray-400">No avatar</span>
-                    )
-                  })()
-                )}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="md:grid md:grid-cols-3 md:gap-6">
+              <div className="md:col-span-1 flex flex-col items-center border-r pr-6">
+                <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+                  {avatarPreview ? (
+                    <img src={avatarPreview} alt="Preview avatar" className="w-full h-full object-cover" />
+                  ) : (
+                    (() => {
+                      const url = currentAvatarUrl()
+                      return url ? (
+                        <img src={url} alt="Avatar" className="w-full h-full object-cover" />
+                      ) : (
+                        <span className="text-gray-400">No avatar</span>
+                      )
+                    })()
+                  )}
+                </div>
+
+                <p className="mt-4 text-center text-sm text-gray-600">{user?.primer_nombre ? `${user.primer_nombre} ${user.primer_apellido || ''}` : (user?.name || user?.email)}</p>
+                <p className="text-xs text-gray-500">{user?.email}</p>
+
+                {/* Move avatar file input below avatar preview; password fields moved to right column */}
+                <div className="mt-4 w-full">
+                  <label className="block text-sm font-medium text-gray-700">Avatar (opcional)</label>
+                  <div className="mt-2 flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                      className="inline-flex items-center gap-2 bg-white border border-gray-300 hover:border-gray-400 shadow-sm rounded-md px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      aria-label="Cambiar foto"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+                        <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm5 3a3 3 0 110 6 3 3 0 010-6z" />
+                      </svg>
+                      Cambiar foto
+                    </button>
+                    <span className="text-sm text-gray-500">(PNG, JPG — máximo 2MB)</span>
+                  </div>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={e => handleFileChange(e.target.files?.[0] || null)}
+                    className="hidden"
+                    aria-hidden="true"
+                  />
+                </div>
               </div>
 
-              <p className="mt-4 text-center text-sm text-gray-600">{user?.primer_nombre ? `${user.primer_nombre} ${user.primer_apellido || ''}` : (user?.name || user?.email)}</p>
-              <p className="text-xs text-gray-500">{user?.email}</p>
-            </div>
-
-            <div className="mt-5 md:mt-0 md:col-span-2">
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="mt-5 md:mt-0 md:col-span-2">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Primer nombre</label>
@@ -277,43 +305,36 @@ export default function Profile(){
                   <input className="mt-1 w-full rounded border px-3 py-2" value={address} onChange={e => setAddress(e.target.value)} />
                 </div>
 
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Avatar (opcional)</label>
-                    <input type="file" accept="image/*" onChange={e => handleFileChange(e.target.files?.[0] || null)} className="mt-1" />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Cambiar contraseña</label>
-                    <input
-                      type="password"
-                      placeholder="Nueva contraseña"
-                      value={newPassword}
-                      onChange={e => setNewPassword(e.target.value)}
-                      className="mt-1 w-full rounded border px-3 py-2"
-                    />
-                    <input
-                      type="password"
-                      placeholder="Confirma la contraseña"
-                      value={confirmPassword}
-                      onChange={e => setConfirmPassword(e.target.value)}
-                      className="mt-2 w-full rounded border px-3 py-2"
-                    />
-                    <p className="text-xs text-gray-400 mt-1">Deja ambos campos vacíos si no deseas cambiar la contraseña.</p>
-                  </div>
+                <div className="mt-4">
+                  <label className="block text-sm font-medium text-gray-700">Cambiar contraseña</label>
+                  <input
+                    type="password"
+                    placeholder="Nueva contraseña"
+                    value={newPassword}
+                    onChange={e => setNewPassword(e.target.value)}
+                    className="mt-1 w-full rounded border px-3 py-2"
+                  />
+                  <input
+                    type="password"
+                    placeholder="Confirma la contraseña"
+                    value={confirmPassword}
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    className="mt-2 w-full rounded border px-3 py-2"
+                  />
+                  <p className="text-xs text-gray-400 mt-1">Deja ambos campos vacíos si no deseas cambiar la contraseña.</p>
                 </div>
 
                 {error && <p className="text-red-600">{error}</p>}
                 {message && <p className="text-green-600">{message}</p>}
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 mt-4">
                   <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded" disabled={loading}>
                     {loading ? 'Guardando...' : 'Guardar cambios'}
                   </button>
                 </div>
-              </form>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </main>
     </div>

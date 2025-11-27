@@ -54,7 +54,18 @@ const Products = () => {
             : imageField
           return { ...item, image }
         })
-        setProductsList(items)
+        // filter out inactive products based on new boolean `state` attribute (or fallback to `active`)
+        const visible = items.filter(p => {
+          if (p.state !== undefined && p.state !== null) {
+            if (typeof p.state === 'boolean') return p.state
+            if (typeof p.state === 'string') return p.state.toLowerCase() === 'true' || p.state === '1'
+            if (typeof p.state === 'number') return p.state === 1
+            return !!p.state
+          }
+          // fallback to older `active` boolean field (default visible unless explicitly false)
+          return p.active !== false
+        })
+        setProductsList(visible)
       } catch (e) {
         console.warn('Could not load products from PocketBase, using local data', e)
         setProductsList(sampleProducts)
@@ -163,15 +174,52 @@ const Products = () => {
 
                   <div className="mt-4 border-t pt-4">
                     <div className="flex items-center gap-4">
-                      <div className="flex items-center border rounded">
+                        <div className="flex items-center border rounded">
                         <button onClick={() => setModalQty(q => Math.max(1, q - 1))} className="px-3 py-2">-</button>
-                        <input type="number" min="1" value={modalQty} onChange={(e) => setModalQty(Math.max(1, Number(e.target.value) || 1))} className="w-16 text-center border-l border-r p-2" />
-                        <button onClick={() => setModalQty(q => q + 1)} className="px-3 py-2">+</button>
+                        <input
+                          type="number"
+                          min={1}
+                          max={selected?.stock ?? undefined}
+                          value={modalQty}
+                          onChange={(e) => {
+                            const raw = Number(e.target.value) || 1
+                            const max = (typeof selected?.stock === 'number') ? selected.stock : Infinity
+                            const v = Math.max(1, Math.min(raw, max))
+                            setModalQty(v)
+                          }}
+                          className="w-16 text-center border-l border-r p-2"
+                          onKeyDown={(e) => {
+                            const allow = ['ArrowUp', 'ArrowDown', 'Tab', 'Home', 'End', 'PageUp', 'PageDown']
+                            if (!allow.includes(e.key)) e.preventDefault()
+                          }}
+                          onPaste={(e) => e.preventDefault()}
+                          onWheel={(e) => e.currentTarget.blur()}
+                        />
+                        <button
+                          onClick={() => setModalQty(q => {
+                            const max = (typeof selected?.stock === 'number') ? selected.stock : Infinity
+                            return Math.min(max, q + 1)
+                          })}
+                          className="px-3 py-2"
+                          disabled={typeof selected?.stock === 'number' && modalQty >= selected.stock}
+                        >+
+                        </button>
                       </div>
 
-                      <button onClick={() => { addToCart(selected, modalQty); setSelected(null); }} className="ml-auto rounded bg-green-600 px-6 py-3 text-white font-semibold">Agregar {modalQty > 1 ? `(${modalQty})` : ''}</button>
-                      <button onClick={() => setSelected(null)} className="rounded border px-4 py-3">Cerrar</button>
+                      <div className="ml-auto flex items-center gap-3">
+                        <button
+                          onClick={() => { addToCart(selected, modalQty); setSelected(null); }}
+                          className="rounded bg-green-600 px-6 py-3 text-white font-semibold"
+                          disabled={typeof selected?.stock === 'number' && modalQty > selected.stock}
+                        >
+                          Agregar {modalQty > 1 ? `(${modalQty})` : ''}
+                        </button>
+                        <button onClick={() => setSelected(null)} className="rounded border px-4 py-3">Cerrar</button>
+                      </div>
                     </div>
+                    {typeof selected?.stock === 'number' && (
+                      <div className="mt-2 text-sm text-gray-500">Disponibles: {selected.stock}</div>
+                    )}
                   </div>
                 </div>
               </div>
