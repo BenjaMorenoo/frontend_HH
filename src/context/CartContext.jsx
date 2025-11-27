@@ -57,13 +57,18 @@ export function CartProvider({ children }) {
   }, [])
 
   const addToCart = (product, qty = 1) => {
-    // optimistic local update
+    // determine allowed stock (if product.stock is provided)
+    const maxStock = (product && typeof product.stock === 'number') ? product.stock : Infinity
+    // optimistic local update with stock cap
     setCart(prev => {
       const found = prev.find(i => i.id === product.id)
       if (found) {
-        return prev.map(i => i.id === product.id ? { ...i, qty: i.qty + qty } : i)
+        const desired = found.qty + qty
+        const newQty = Math.min(desired, maxStock)
+        return prev.map(i => i.id === product.id ? { ...i, qty: newQty } : i)
       }
-      return [...prev, { ...product, qty }]
+      const initialQty = Math.min(qty, maxStock)
+      return [...prev, { ...product, qty: initialQty }]
     })
 
     // sync to server (async, best-effort)
@@ -72,9 +77,12 @@ export function CartProvider({ children }) {
         // look for existing server record
         const q = `?filter=productId="${product.id}" && sessionId="${sessionId}"`
         const res = await getRecords('cart_items', q)
-        if (res && res.items && res.items.length > 0) {
+          if (res && res.items && res.items.length > 0) {
           const rec = res.items[0]
-          await updateRecord('cart_items', rec.id, { qty: (rec.qty || 0) + qty })
+          // enforce stock limit when updating server-side qty
+          const currentServerQty = rec.qty || 0
+          const allowed = (typeof product.stock === 'number') ? Math.min(currentServerQty + qty, product.stock) : (currentServerQty + qty)
+          await updateRecord('cart_items', rec.id, { qty: allowed })
           return
         }
 
@@ -83,7 +91,9 @@ export function CartProvider({ children }) {
         fd.append('productId', product.id)
         fd.append('title', product.title)
         fd.append('price', String(product.price))
-        fd.append('qty', String(qty))
+        // ensure qty respects stock when creating server record
+        const createQty = (typeof product.stock === 'number') ? String(Math.min(qty, product.stock)) : String(qty)
+        fd.append('qty', createQty)
         fd.append('sessionId', sessionId)
         fd.append('unit', product.unit || '')
         fd.append('code', product.code || '')
@@ -130,7 +140,7 @@ export function CartProvider({ children }) {
               productId: product.id,
               title: product.title,
               price: product.price,
-              qty,
+              qty: (typeof product.stock === 'number') ? Math.min(qty, product.stock) : qty,
               sessionId,
               unit: product.unit || '',
               code: product.code || ''
@@ -150,7 +160,7 @@ export function CartProvider({ children }) {
                   productId: product.id,
                   title: product.title,
                   price: product.price,
-                  qty,
+                  qty: (typeof product.stock === 'number') ? Math.min(qty, product.stock) : qty,
                   sessionId,
                   unit: product.unit || '',
                   code: product.code || '',
@@ -220,12 +230,19 @@ export function CartProvider({ children }) {
 
   const updateQty = (id, qty) => {
     if (qty <= 0) return removeFromCart(id)
-    // optimistic local update
-    setCart(prev => prev.map(i => i.id === id ? { ...i, qty } : i))
+    // enforce stock limit if available on item
+    setCart(prev => prev.map(i => {
+      if (i.id !== id) return i
+      const max = (typeof i.stock === 'number') ? i.stock : Infinity
+      const newQty = Math.min(qty, max)
+      return { ...i, qty: newQty }
+    }))
     ;(async () => {
       try {
         const item = cart.find(i => i.id === id)
         const serverId = item?.serverId
+        // ensure server update respects stock
+        if (item && typeof item.stock === 'number' && qty > item.stock) qty = item.stock
         if (serverId) {
           await updateRecord('cart_items', serverId, { qty })
         } else {

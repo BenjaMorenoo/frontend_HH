@@ -108,7 +108,7 @@ export default function Post() {
           {post.cover && <img src={fileUrl('posts', post.id, post.cover)} alt={post.title} className="w-full h-48 sm:h-64 md:h-80 object-cover rounded mb-4" />}
           <h1 className="text-xl sm:text-2xl font-semibold mb-2">{post.title}</h1>
           <div className="text-xs sm:text-sm text-gray-500 mb-4">Tipo: {post.type} — Autor: {post.author?.email || (post.expand?.author?.email || '—')}</div>
-          <div className="prose max-w-none mb-6 whitespace-pre-wrap text-sm sm:text-base">{post.content}</div>
+          <div className="prose max-w-none mb-6 whitespace-pre-wrap text-sm sm:text-base" dangerouslySetInnerHTML={{ __html: post.content }} />
         </article>
 
         <section className="mt-6">

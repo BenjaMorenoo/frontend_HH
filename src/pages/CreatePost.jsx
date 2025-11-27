@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { useAuth } from '../context/AuthContext'
@@ -13,6 +13,7 @@ export default function CreatePost() {
   const [excerpt, setExcerpt] = useState('')
   const [content, setContent] = useState('')
   const [cover, setCover] = useState(null)
+  const editorRef = useRef(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -128,8 +129,30 @@ export default function CreatePost() {
             </div>
 
             <div>
-              <label className="text-sm block mb-1">Contenido</label>
-              <textarea value={content} onChange={e => setContent(e.target.value)} rows={10} className="w-full border rounded p-2" />
+              <label className="text-sm block mb-2">Contenido</label>
+
+              <div className="mb-2 flex items-center gap-2 flex-wrap">
+                <button type="button" onClick={() => document.execCommand('bold')} className="px-2 py-1 border rounded text-sm">B</button>
+                <button type="button" onClick={() => document.execCommand('italic')} className="px-2 py-1 border rounded text-sm">I</button>
+                <button type="button" onClick={() => document.execCommand('underline')} className="px-2 py-1 border rounded text-sm">U</button>
+                <select onChange={(e) => document.execCommand('fontName', false, e.target.value)} className="border rounded px-2 py-1 text-sm">
+                  <option value="Arial">Sans</option>
+                  <option value="Georgia">Serif</option>
+                  <option value="'Courier New', Courier">Mono</option>
+                  <option value="Cursive">Cursiva</option>
+                </select>
+                <button type="button" onClick={() => document.execCommand('insertUnorderedList')} className="px-2 py-1 border rounded text-sm">• Lista</button>
+                <button type="button" onClick={() => document.execCommand('formatBlock', false, 'blockquote')} className="px-2 py-1 border rounded text-sm">Cita</button>
+              </div>
+
+              <div
+                ref={editorRef}
+                contentEditable
+                suppressContentEditableWarning
+                onInput={() => setContent(editorRef.current?.innerHTML || '')}
+                className="min-h-[220px] max-h-[420px] overflow-auto border rounded p-3 prose"
+                style={{outline: 'none'}}
+              />
             </div>
 
             <div>
@@ -139,7 +162,7 @@ export default function CreatePost() {
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded w-full sm:w-auto">{loading ? 'Publicando...' : 'Publicar'}</button>
-              <button type="button" onClick={() => { setTitle(''); setExcerpt(''); setContent(''); setCover(null); setError(null) }} className="w-full sm:w-auto border rounded px-4 py-2">Limpiar</button>
+              <button type="button" onClick={() => { setTitle(''); setExcerpt(''); setContent(''); if (editorRef.current) editorRef.current.innerHTML = ''; setCover(null); setError(null) }} className="w-full sm:w-auto border rounded px-4 py-2">Limpiar</button>
             </div>
           </form>
         </div>

@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
-import { createRecord } from '../utils/pocketApi'
+import { createRecord, createRecordForm, getRecord, updateRecord, fileUrl } from '../utils/pocketApi'
 
 export default function Checkout() {
-  const { cart, cartTotal, formatCLP, setCart } = useCart()
+  const { cart, cartTotal, formatCLP, setCart, clearCart } = useCart()
   const { user, isAuthenticated, updateProfile } = useAuth()
   const navigate = useNavigate()
 
@@ -85,7 +85,19 @@ export default function Checkout() {
         // PocketBase relation field for the user must be sent under the relation field name
         // (here `user`) with the related record id. Using `userId` won't populate the relation.
         user: user?.id || null,
-        items: JSON.stringify(cart.map(i => ({ id: i.id, title: i.title, price: i.price, qty: i.qty }))),
+        items: JSON.stringify(cart.map(i => {
+          // include image metadata so orders can show thumbnails later
+          let imageUrl = ''
+          if (i.image && typeof i.image === 'string') {
+            if (/^https?:\/\//i.test(i.image)) imageUrl = i.image
+            else {
+              try { imageUrl = fileUrl('products', i.id, i.image) } catch (e) { imageUrl = '' }
+            }
+          } else if (i.imageUrl) {
+            imageUrl = i.imageUrl
+          }
+          return { id: i.id, productId: i.id, title: i.title, price: i.price, qty: i.qty, image: i.image || '', imageUrl }
+        }) ),
         subtotal,
         iva,
         total,
@@ -93,7 +105,79 @@ export default function Checkout() {
         paymentMethod: method,
         status: 'paid'
       }
-      const created = await createRecord('orders', body)
+      let created = null
+      try {
+        created = await createRecord('orders', body)
+      } catch (createErr) {
+        console.warn('createRecord failed, trying FormData fallback', createErr)
+        // try FormData fallback (useful if collection has file fields)
+        try {
+          const fd = new FormData()
+          fd.append('user', body.user)
+          fd.append('items', body.items)
+          fd.append('subtotal', String(body.subtotal))
+          fd.append('iva', String(body.iva))
+          fd.append('total', String(body.total))
+          fd.append('address', body.address || '')
+          fd.append('paymentMethod', body.paymentMethod || '')
+          fd.append('status', body.status || '')
+
+          // Try to attach the first available product image as the required 'image' field
+          try {
+            const firstWithImage = cart.find(i => (i.image && typeof i.image === 'string') || i.imageUrl)
+            if (firstWithImage) {
+              let imgSrc = ''
+              if (firstWithImage.image && /^https?:\/\//i.test(firstWithImage.image)) imgSrc = firstWithImage.image
+              else if (firstWithImage.image && typeof firstWithImage.image === 'string') {
+                try { imgSrc = fileUrl('products', firstWithImage.id, firstWithImage.image) } catch (e) { imgSrc = '' }
+              } else if (firstWithImage.imageUrl) imgSrc = firstWithImage.imageUrl
+
+              if (imgSrc) {
+                try {
+                  const r = await fetch(imgSrc)
+                  if (r.ok) {
+                    const blob = await r.blob()
+                    const parts = (imgSrc.split('?')[0] || '').split('/')
+                    const fname = parts[parts.length - 1] || `order-image-${Date.now()}`
+                    const file = new File([blob], fname, { type: blob.type })
+                    fd.append('image', file, fname)
+                  } else {
+                    console.warn('Could not fetch image for order attachment, status:', r.status)
+                  }
+                } catch (err) {
+                  console.warn('Failed to fetch/attach image for order', err)
+                }
+              }
+            }
+          } catch (err) {
+            console.warn('Error while preparing order image attachment', err)
+          }
+
+          created = await createRecordForm('orders', fd)
+        } catch (formErr) {
+          console.error('createRecordForm also failed', formErr)
+          throw formErr
+        }
+      }
+      // decrement stock for each product in the order (best-effort)
+      try {
+        await Promise.all(cart.map(async (item) => {
+          try {
+            // try to fetch current product record to read stock
+            const prod = await getRecord('products', item.id)
+            const currentStock = prod && typeof prod.stock === 'number' ? prod.stock : (prod && prod.stock ? Number(prod.stock) : NaN)
+            if (!Number.isFinite(currentStock)) return
+            const newStock = Math.max(0, currentStock - (item.qty || 0))
+            if (newStock !== currentStock) {
+              await updateRecord('products', item.id, { stock: newStock })
+            }
+          } catch (err) {
+            console.warn('Could not update stock for product', item.id, err)
+          }
+        }))
+      } catch (err) {
+        console.warn('Error while updating stocks after order creation', err)
+      }
       if (saveAddress) {
         // attempt to save address to user
         try {
@@ -105,8 +189,13 @@ export default function Checkout() {
         }
       }
 
-      // clear local cart
-      setCart([])
+      // clear local and server-side cart items
+      try {
+        clearCart()
+      } catch (err) {
+        // fallback to local clear
+        setCart([])
+      }
       setSuccess(created)
     } catch (err) {
       console.error(err)

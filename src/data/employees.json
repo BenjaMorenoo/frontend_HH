@@ -1,0 +1,14 @@
+[
+  {
+    "id": "emp_1",
+    "name": "María Pérez",
+    "role": "Encargada de tienda",
+    "monthlySalary": 900000
+  },
+  {
+    "id": "emp_2",
+    "name": "Juan González",
+    "role": "Repartidor",
+    "monthlySalary": 650000
+  }
+]

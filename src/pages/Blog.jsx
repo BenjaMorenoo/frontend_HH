@@ -55,20 +55,34 @@ const Blog = () => {
         {error && <div className="text-red-600">{error}</div>}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
-          {posts.map(p => (
-            <article key={p.id} className="bg-white rounded shadow-sm overflow-hidden flex flex-col h-full">
-              {p.cover && (
-                <div className="h-40 w-full flex items-center justify-center overflow-hidden bg-gray-100">
-                  <img src={fileUrl('posts', p.id, p.cover)} alt={p.title} className="h-full w-auto max-w-full object-contain mx-auto" />
+          {posts.map(p => {
+            const stripHtml = (html) => {
+              if (!html) return ''
+              try {
+                const div = document.createElement('div')
+                div.innerHTML = html
+                return (div.textContent || div.innerText || '').trim()
+              } catch (e) {
+                return html.replace(/<[^>]*>/g, '')
+              }
+            }
+            const previewSource = p.excerpt && p.excerpt.trim() ? p.excerpt : stripHtml(p.content || '')
+            const preview = previewSource.length > 140 ? `${previewSource.slice(0,140).trim()}...` : previewSource
+            return (
+              <article key={p.id} className="bg-white rounded shadow-sm overflow-hidden flex flex-col h-full">
+                {p.cover && (
+                  <div className="h-40 w-full flex items-center justify-center overflow-hidden bg-gray-100">
+                    <img src={fileUrl('posts', p.id, p.cover)} alt={p.title} className="h-full w-auto max-w-full object-contain mx-auto" />
+                  </div>
+                )}
+                <div className="p-4 flex-1 flex flex-col">
+                  <h3 className="text-lg md:text-xl font-medium"><Link to={`/blog/${p.id}`}>{p.title}</Link></h3>
+                  <p className="text-sm md:text-base text-gray-600 mt-2 flex-1">{preview}</p>
+                  <div className="mt-3 text-xs md:text-sm text-gray-500">Tipo: {p.type}</div>
                 </div>
-              )}
-              <div className="p-4 flex-1 flex flex-col">
-                <h3 className="text-lg md:text-xl font-medium"><Link to={`/blog/${p.id}`}>{p.title}</Link></h3>
-                <p className="text-sm md:text-base text-gray-600 mt-2 flex-1">{p.excerpt || (p.content || '').slice(0,120) + '...'}</p>
-                <div className="mt-3 text-xs md:text-sm text-gray-500">Tipo: {p.type}</div>
-              </div>
-            </article>
-          ))}
+              </article>
+            )
+          })}
         </div>
       </div>
     </div>
