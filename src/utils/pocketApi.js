@@ -9,7 +9,7 @@ function setAuthToken(token) {
   try {
     localStorage.setItem('pb_token', token)
   } catch (e) {
-    // ignore storage errors (quota, privacy modes)
+    // ignorar errores de almacenamiento (cuota, modos de privacidad)
   }
 }
 
@@ -29,21 +29,21 @@ async function request(path, opts = {}) {
   })
   if (!res.ok) {
     const text = await res.text()
-    // try to provide a clearer hint when PocketBase reports missing collection
+    // intentar proporcionar una pista más clara cuando PocketBase informa una colección faltante
     let hint = ''
     try {
       const parsed = JSON.parse(text || '{}')
       const msg = (parsed && parsed.message) ? String(parsed.message) : text
       if (res.status === 404 && /missing or invalid collection context/i.test(msg)) {
-        hint = `\nHint: PocketBase responded with 'Missing or invalid collection context'. Verify the collection slug in PocketBase admin matches the name used in the request path (${path}).`
+        hint = `\nPista: PocketBase respondió con 'Missing or invalid collection context'. Verifica que el slug de la colección en el admin de PocketBase coincida con el nombre usado en la ruta (${path}).`
       }
     } catch (e) {
-      // ignore JSON parse errors
+      // ignorar errores al parsear JSON
     }
 
     throw new Error(`${res.status} ${res.statusText} - ${text}${hint}`)
   }
-  // some endpoints return empty body for DELETE
+  // algunos endpoints retornan cuerpo vacío para DELETE
   const txt = await res.text()
   return txt ? JSON.parse(txt) : {}
 }
@@ -54,7 +54,7 @@ export async function getRecords(collection, query = '') {
 
 export function fileUrl(collection, recordId, filename) {
   if (!filename) return ''
-  // filename may already be a full URL
+  // el nombre de archivo puede ya ser una URL completa
   if (typeof filename === 'string' && (filename.startsWith('http://') || filename.startsWith('https://'))) return filename
   return `${BASE}/api/files/${collection}/${recordId}/${filename}`
 }
@@ -70,7 +70,7 @@ export async function createRecord(collection, body) {
   })
 }
 
-// Create using FormData (useful to upload files on create)
+// Crear usando FormData (útil para subir archivos al crear)
 export async function createRecordForm(collection, formData) {
   const token = getAuthToken()
   const headers = {}
@@ -83,13 +83,13 @@ export async function createRecordForm(collection, formData) {
   })
   const text = await res.text()
   if (!res.ok) {
-    // try to parse JSON error body for better messages
+    // intentar parsear el error JSON para mejores mensajes
     let parsed = null
-    try { parsed = JSON.parse(text || '{}') } catch (e) { /* ignore */ }
+    try { parsed = JSON.parse(text || '{}') } catch (e) { /* ignorar */ }
     const msg = parsed && parsed.message ? parsed.message : text
     let hint = ''
     if (res.status === 400 && parsed && parsed.data) {
-      hint = `\nField errors: ${JSON.stringify(parsed.data)}`
+      hint = `\nErrores de campos: ${JSON.stringify(parsed.data)}`
     }
     throw new Error(`${res.status} ${res.statusText} - ${msg}${hint}`)
   }
@@ -109,7 +109,7 @@ export async function deleteRecord(collection, id) {
   })
 }
 
-// Authentication helpers
+// Helpers de autenticación
 export async function authWithPassword(identity, password) {
   const res = await request('/api/collections/users/auth-with-password', {
     method: 'POST',
@@ -120,7 +120,7 @@ export async function authWithPassword(identity, password) {
     try {
       localStorage.setItem('pb_user', JSON.stringify(res.record || res))
     } catch (e) {
-      // ignore storage errors
+      // ignorar errores de almacenamiento
     }
   }
   return res
@@ -137,9 +137,9 @@ export async function registerUser({
   phone,
   address,
 }) {
-  // PocketBase default users collection is 'users'
+  // La colección de usuarios por defecto en PocketBase es 'users'
   const body = { email, password, passwordConfirm }
-  // support both new separated fields and legacy `name`
+  // soporta tanto campos nuevos separados como el campo legacy `name`
   if (primer_nombre) body.primer_nombre = primer_nombre
   if (segundo_nombre) body.segundo_nombre = segundo_nombre
   if (primer_apellido) body.primer_apellido = primer_apellido
@@ -155,7 +155,7 @@ export function logout() {
   clearAuthToken()
 }
 
-// Update using FormData (useful for file uploads such as avatar)
+// Actualizar usando FormData (útil para subir archivos como avatar)
 export async function updateRecordForm(collection, id, formData) {
   const token = getAuthToken()
   const headers = {}
@@ -174,4 +174,14 @@ export async function updateRecordForm(collection, id, formData) {
   return txt ? JSON.parse(txt) : {}
 }
 
-export default { getRecords, getRecord, createRecord, updateRecord, deleteRecord, fileUrl, authWithPassword, registerUser, logout }
+export default { 
+  getRecords, 
+  getRecord, 
+  createRecord, 
+  updateRecord, 
+  deleteRecord, 
+  fileUrl, 
+  authWithPassword, 
+  registerUser, 
+  logout 
+}
